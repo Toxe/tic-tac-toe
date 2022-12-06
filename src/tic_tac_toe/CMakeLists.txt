@@ -1,8 +1,12 @@
 add_library(lib_tic_tac_toe
+        game/board.cpp
+        game/board.hpp
         game/execute_command.cpp
         game/execute_command.hpp
         game/game_state.cpp
         game/game_state.hpp
+        game/player.cpp
+        game/player.hpp
         input/read_command.cpp
         input/read_command.hpp
         output/generate_output.cpp
@@ -21,6 +25,9 @@ target_include_directories(lib_tic_tac_toe INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 # Tests
 if (BUILD_TESTING)
     add_executable(tic_tac_toe_tests
+            game/board.test.cpp
+            game/game_state.test.cpp
+            game/player.test.cpp
             output/generate_output.test.cpp
             )
 

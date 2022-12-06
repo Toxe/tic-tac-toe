@@ -3,9 +3,9 @@
 
 #include "generate_output.hpp"
 
-namespace tic_tac_toe::detail {
+namespace tic_tac_toe {
 
-TEST_CASE("generate_output()")
+TEST_CASE("output/generate_output")
 {
     SECTION("empty board")
     {
@@ -17,10 +17,10 @@ TEST_CASE("generate_output()")
                               "| 7 | 8 | 9 |\n"
                               "+---+---+---+\n";
 
-        const GameState game_state;
+        const Board board;
 
-        CHECK_THAT(generate_output(game_state), Catch::Matchers::Equals(s));
+        CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
     }
 }
 
-}  // namespace tic_tac_toe::detail
+}  // namespace tic_tac_toe

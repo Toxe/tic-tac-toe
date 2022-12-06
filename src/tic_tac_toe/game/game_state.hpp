@@ -1,15 +1,15 @@
 #pragma once
 
-namespace tic_tac_toe {
+#include "player.hpp"
 
-using player_id = int;
+namespace tic_tac_toe {
 
 class GameState {
 public:
-    [[nodiscard]] bool is_empty_cell(int row, int col) const;
-    [[nodiscard]] player_id get_player_of_cell(int row, int col) const;
+    [[nodiscard]] player_id current_player() const { return current_player_; }
 
 private:
+    player_id current_player_ = 1;
 };
 
 }  // namespace tic_tac_toe
