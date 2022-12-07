@@ -4,33 +4,28 @@
 
 namespace tic_tac_toe {
 
-player_id Board::get_player_of_square(const int row, const int col) const
+player_id Board::get_player_of_square(const Square square) const
 {
-    assert(row >= 0 && row < 3);
-    assert(col >= 0 && col < 3);
-
-    return squares_[row][col];
+    return squares_[static_cast<std::size_t>(square.row)][static_cast<std::size_t>(square.col)];
 }
 
-bool Board::empty_square(const int row, const int col) const
+bool Board::empty_square(const Square square) const
 {
-    return get_player_of_square(row, col) == 0;
+    return get_player_of_square(square) == 0;
 }
 
-void Board::change_owner_of_square(const int row, const int col, player_id player)
+void Board::change_owner_of_square(const Square square, player_id player)
 {
-    assert(row >= 0 && row < 3);
-    assert(col >= 0 && col < 3);
     assert(player == 1 || player == 2);
 
-    squares_[row][col] = player;
+    squares_[static_cast<std::size_t>(square.row)][static_cast<std::size_t>(square.col)] = player;
 }
 
 bool Board::game_over() const
 {
     for (int row = 0; row < 3; ++row)
         for (int col = 0; col < 3; ++col)
-            if (empty_square(row, col))
+            if (empty_square({row, col}))
                 return false;
 
     return true;

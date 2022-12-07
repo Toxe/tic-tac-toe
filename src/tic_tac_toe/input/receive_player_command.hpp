@@ -4,6 +4,6 @@
 
 namespace tic_tac_toe {
 
-void execute_command(Board& board, int command);
+int receive_player_command(const Board& board);
 
 }  // namespace tic_tac_toe

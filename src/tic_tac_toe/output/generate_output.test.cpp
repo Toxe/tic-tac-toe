@@ -17,7 +17,7 @@ TEST_CASE("output/generate_output")
                               "| 7 | 8 | 9 |\n"
                               "+---+---+---+\n";
 
-        const Board board;
+        const Board board{};
 
         CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
     }

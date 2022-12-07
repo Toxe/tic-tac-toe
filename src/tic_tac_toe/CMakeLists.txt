@@ -1,4 +1,6 @@
 add_library(lib_tic_tac_toe
+        ai/receive_ai_command.cpp
+        ai/receive_ai_command.hpp
         game/board.cpp
         game/board.hpp
         game/execute_command.cpp
@@ -7,8 +9,12 @@ add_library(lib_tic_tac_toe
         game/game_state.hpp
         game/player.cpp
         game/player.hpp
-        input/read_command.cpp
-        input/read_command.hpp
+        game/square.cpp
+        game/square.hpp
+        input/eval_input.cpp
+        input/eval_input.hpp
+        input/receive_player_command.cpp
+        input/receive_player_command.hpp
         output/generate_output.cpp
         output/generate_output.hpp
         output/show_output.cpp
@@ -28,6 +34,8 @@ if (BUILD_TESTING)
             game/board.test.cpp
             game/game_state.test.cpp
             game/player.test.cpp
+            game/square.test.cpp
+            input/eval_input.test.cpp
             output/generate_output.test.cpp
             )
 

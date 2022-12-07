@@ -27,19 +27,19 @@ void generate_newline(std::stringstream& out)
     out << '\n';
 }
 
-void generate_cell(std::stringstream& out, const Board& board, const int row, const int col)
+void generate_cell(std::stringstream& out, const Board& board, const Square square)
 {
-    if (board.is_empty_square(row, col))
-        out << ' ' << (row * 3 + col + 1) << ' ';
+    if (board.empty_square(square))
+        out << ' ' << (square.row * 3 + square.col + 1) << ' ';
     else
-        out << ' ' << player_symbol(board.get_player_of_square(row, col)) << ' ';
+        out << ' ' << player_symbol(board.get_player_of_square(square)) << ' ';
 }
 
 void generate_row(std::stringstream& out, const Board& board, const int row)
 {
     for (int col = 0; col < 3; ++col) {
         generate_vertical_line(out);
-        generate_cell(out, board, row, col);
+        generate_cell(out, board, {row, col});
     }
 
     generate_vertical_line(out);

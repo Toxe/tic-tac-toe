@@ -2,7 +2,7 @@
 
 namespace tic_tac_toe {
 
-void execute_command(GameState& game_state, int command)
+void execute_command(Board& board, int command)
 {
 }
 

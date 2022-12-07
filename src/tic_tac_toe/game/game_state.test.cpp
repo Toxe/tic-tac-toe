@@ -12,6 +12,19 @@ TEST_CASE("game/game_state")
 
         CHECK(game_state.current_player() == 1);
     }
+
+    SECTION("can switch between the players")
+    {
+        GameState game_state;
+
+        CHECK(game_state.current_player() == 1);
+
+        game_state.switch_players();
+        CHECK(game_state.current_player() == 2);
+
+        game_state.switch_players();
+        CHECK(game_state.current_player() == 1);
+    }
 }
 
 }  // namespace tic_tac_toe

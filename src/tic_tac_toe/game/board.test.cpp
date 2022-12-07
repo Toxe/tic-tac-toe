@@ -12,7 +12,7 @@ TEST_CASE("game/board")
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
-                CHECK(board.empty_square(row, col));
+                CHECK(board.empty_square({row, col}));
     }
 
     SECTION("a new board is not game over")
@@ -28,11 +28,11 @@ TEST_CASE("game/board")
 
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 3; ++col) {
-                board.change_owner_of_square(row, col, 1);
-                CHECK(board.get_player_of_square(row, col) == 1);
+                board.change_owner_of_square({row, col}, 1);
+                CHECK(board.get_player_of_square({row, col}) == 1);
 
-                board.change_owner_of_square(row, col, 2);
-                CHECK(board.get_player_of_square(row, col) == 2);
+                board.change_owner_of_square({row, col}, 2);
+                CHECK(board.get_player_of_square({row, col}) == 2);
             }
         }
     }
@@ -43,7 +43,7 @@ TEST_CASE("game/board")
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
-                board.change_owner_of_square(row, col, 1);
+                board.change_owner_of_square({row, col}, 1);
 
         CHECK(board.game_over());
     }
