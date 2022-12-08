@@ -10,12 +10,13 @@ TEST_CASE("output/generate_output")
     SECTION("empty board")
     {
         const std::string s = "+---+---+---+\n"
-                              "| 1 | 2 | 3 |\n"
+                              "|   |   |   | 1\n"
                               "+---+---+---+\n"
-                              "| 4 | 5 | 6 |\n"
+                              "|   |   |   | 2\n"
                               "+---+---+---+\n"
-                              "| 7 | 8 | 9 |\n"
-                              "+---+---+---+\n";
+                              "|   |   |   | 3\n"
+                              "+---+---+---+\n"
+                              "  1   2   3\n";
 
         const Board board{};
 
