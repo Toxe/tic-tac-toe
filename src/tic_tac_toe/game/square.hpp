@@ -10,4 +10,7 @@ struct Square {
     short col;
 };
 
+inline bool operator==(const Square& lhs, const Square& rhs) { return lhs.row == rhs.row && lhs.col == rhs.col; }
+inline bool operator!=(const Square& lhs, const Square& rhs) { return !(lhs == rhs); }
+
 }  // namespace tic_tac_toe

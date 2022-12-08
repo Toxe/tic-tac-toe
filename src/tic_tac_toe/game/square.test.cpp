@@ -6,6 +6,14 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/square")
 {
+    SECTION("construct")
+    {
+        const Square square{1, 2};
+
+        CHECK(square.row == 1);
+        CHECK(square.col == 2);
+    }
+
     SECTION("row and column must be between 0 to 2")
     {
         for (int row = 0; row < 3; ++row)
@@ -19,6 +27,12 @@ TEST_CASE("game/square")
         CHECK_THROWS(Square{3, 1});
         CHECK_THROWS(Square{1, -1});
         CHECK_THROWS(Square{1, 3});
+    }
+
+    SECTION("can compare squares")
+    {
+        CHECK(Square{1, 2} == Square{1, 2});
+        CHECK(Square{1, 2} != Square{0, 0});
     }
 }
 
