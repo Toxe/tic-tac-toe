@@ -46,6 +46,22 @@ TEST_CASE("input/eval_input")
             CHECK(eval_input(board, "11") != std::nullopt);
             CHECK(eval_input(board, "12") == std::nullopt);
         }
+
+        SECTION("command belongs to the human player")
+        {
+            const Board board{};
+            const auto command = eval_input(board, "11");
+
+            CHECK(command->player == human_player_id);
+        }
+
+        SECTION("command contains the correct coordinates")
+        {
+            const Board board{};
+            const auto command = eval_input(board, "23");
+
+            CHECK(command->square == Square{1, 2});
+        }
     }
 
     SECTION("is_valid_input_digit()")

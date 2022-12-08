@@ -32,6 +32,7 @@ target_include_directories(lib_tic_tac_toe INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 # Tests
 if (BUILD_TESTING)
     add_executable(tic_tac_toe_tests
+            ai/receive_ai_command.test.cpp
             game/board.test.cpp
             game/command.test.cpp
             game/execute_command.test.cpp
