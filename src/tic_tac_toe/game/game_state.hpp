@@ -11,7 +11,7 @@ public:
     void switch_players();
 
 private:
-    player_id current_player_ = 1;
+    player_id current_player_ = human_player_id;
 };
 
 }  // namespace tic_tac_toe

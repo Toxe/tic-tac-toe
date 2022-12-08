@@ -6,24 +6,27 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/game_state")
 {
-    SECTION("first player is player 1")
+    SECTION("first player is the human player")
     {
         const GameState game_state;
 
-        CHECK(game_state.current_player() == 1);
+        CHECK(game_state.current_player() == human_player_id);
     }
 
     SECTION("can switch between the players")
     {
         GameState game_state;
 
-        CHECK(game_state.current_player() == 1);
+        CHECK(game_state.current_player() == human_player_id);
 
         game_state.switch_players();
-        CHECK(game_state.current_player() == 2);
+        CHECK(game_state.current_player() == ai_player_id);
 
         game_state.switch_players();
-        CHECK(game_state.current_player() == 1);
+        CHECK(game_state.current_player() == human_player_id);
+
+        game_state.switch_players();
+        CHECK(game_state.current_player() == ai_player_id);
     }
 }
 

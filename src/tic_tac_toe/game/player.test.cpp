@@ -6,16 +6,16 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/player")
 {
-    SECTION("player 1 is human")
+    SECTION("check if player is human")
     {
-        CHECK(player_is_human(1) == true);
-        CHECK(player_is_ai(1) == false);
+        CHECK(player_is_human(human_player_id) == true);
+        CHECK(player_is_ai(human_player_id) == false);
     }
 
-    SECTION("player 2 is AI")
+    SECTION("check if player is AI")
     {
-        CHECK(player_is_human(2) == false);
-        CHECK(player_is_ai(2) == true);
+        CHECK(player_is_human(ai_player_id) == false);
+        CHECK(player_is_ai(ai_player_id) == true);
     }
 }
 

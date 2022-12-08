@@ -7,9 +7,9 @@ namespace tic_tac_toe {
 
 char player_symbol(player_id player)
 {
-    assert(player == 1 || player == 2);
+    assert(player == human_player_id || player == ai_player_id);
 
-    return player == 1 ? 'X' : 'O';
+    return player == human_player_id ? 'X' : 'O';
 }
 
 void generate_horizontal_line(std::stringstream& out)

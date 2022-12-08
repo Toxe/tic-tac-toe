@@ -16,7 +16,7 @@ bool Board::empty_square(const Square square) const
 
 void Board::change_owner_of_square(const Square square, player_id player)
 {
-    assert(player == 1 || player == 2);
+    assert(player == human_player_id || player == ai_player_id);
 
     squares_[static_cast<std::size_t>(square.row)][static_cast<std::size_t>(square.col)] = player;
 }
