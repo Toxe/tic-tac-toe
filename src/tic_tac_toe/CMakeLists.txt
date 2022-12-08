@@ -3,6 +3,7 @@ add_library(lib_tic_tac_toe
         ai/receive_ai_command.hpp
         game/board.cpp
         game/board.hpp
+        game/command.hpp
         game/execute_command.cpp
         game/execute_command.hpp
         game/game_state.cpp
@@ -32,6 +33,8 @@ target_include_directories(lib_tic_tac_toe INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 if (BUILD_TESTING)
     add_executable(tic_tac_toe_tests
             game/board.test.cpp
+            game/command.test.cpp
+            game/execute_command.test.cpp
             game/game_state.test.cpp
             game/player.test.cpp
             game/square.test.cpp

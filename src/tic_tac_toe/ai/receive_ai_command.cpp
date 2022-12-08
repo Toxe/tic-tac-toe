@@ -2,9 +2,9 @@
 
 namespace tic_tac_toe {
 
-int receive_ai_command(const Board& board)
+Command receive_ai_command(const Board& board)
 {
-    return 0;
+    return Command{ai_player_id, Square{0, 0}};
 }
 
 }  // namespace tic_tac_toe

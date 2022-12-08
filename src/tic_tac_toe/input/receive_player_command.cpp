@@ -7,7 +7,7 @@
 
 namespace tic_tac_toe {
 
-int receive_player_command(const Board& board)
+Command receive_player_command(const Board& board)
 {
     while (true) {
         std::string input;

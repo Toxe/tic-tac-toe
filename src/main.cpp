@@ -15,13 +15,7 @@ int main()
     while (!board.game_over()) {
         show_output(board);
 
-        int command{};
-
-        if (player_is_human(game_state.current_player()))
-            command = receive_player_command(board);
-        else
-            command = receive_ai_command(board);
-
+        const auto command = (player_is_human(game_state.current_player())) ? receive_player_command(board) : receive_ai_command(board);
         execute_command(board, command);
 
         game_state.switch_players();

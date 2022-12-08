@@ -4,20 +4,20 @@
 
 namespace tic_tac_toe {
 
-std::optional<int> eval_input(const Board& board, const std::string& input)
+std::optional<Command> eval_input(const Board& board, const std::string& input)
 {
     if (input.empty() || input.size() > 2)
-        return std::nullopt;
+        return {};
 
     if (!is_valid_input_digit(input[0]) || !is_valid_input_digit(input[1]))
-        return std::nullopt;
+        return {};
 
     const Square square{convert_input_digit_to_square_coord(input[0]), convert_input_digit_to_square_coord(input[1])};
 
     if (!board.empty_square(square))
-        return std::nullopt;
+        return {};
 
-    return 1;
+    return Command{human_player_id, square};
 }
 
 bool is_valid_input_digit(const char c)
