@@ -6,6 +6,14 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/square")
 {
+    SECTION("default construct")
+    {
+        const Square square;
+
+        CHECK(square.row == 0);
+        CHECK(square.col == 0);
+    }
+
     SECTION("construct")
     {
         const Square square{1, 2};
