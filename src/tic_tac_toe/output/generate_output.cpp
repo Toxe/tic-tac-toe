@@ -29,7 +29,7 @@ void generate_row_number(std::stringstream& out, const int row)
 
 void generate_column_numbers(std::stringstream& out)
 {
-    out << "  1   2   3\n";
+    out << "  A   B   C\n";
 }
 
 void generate_cell(std::stringstream& out, const Board& board, const Square square)
