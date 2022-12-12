@@ -7,13 +7,24 @@
 
 namespace tic_tac_toe {
 
+std::string read_input()
+{
+    std::string input;
+
+    while (true) {
+        if (scn::prompt("? ", "{}", input))
+            break;
+
+        fmt::print("invalid input\n");
+    }
+
+    return input;
+}
+
 Command receive_player_command(const Board& board)
 {
     while (true) {
-        std::string input;
-
-        scn::prompt("? ", "{}", input);
-
+        const auto input = read_input();
         const auto command = eval_input(board, input);
 
         if (!command)
