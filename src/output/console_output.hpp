@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../game/board.hpp"
+#include <string>
 
 namespace tic_tac_toe {
 
-void show_output(const Board& board);
+void console_output(const std::string& output);
 
 }  // namespace tic_tac_toe
