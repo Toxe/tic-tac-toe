@@ -22,6 +22,27 @@ TEST_CASE("output/generate_output")
 
         CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
     }
+
+    SECTION("board with occupied squares")
+    {
+        const std::string s = "+---+---+---+\n"
+                              "| X | O |   | 1\n"
+                              "+---+---+---+\n"
+                              "|   |   | X | 2\n"
+                              "+---+---+---+\n"
+                              "| O |   |   | 3\n"
+                              "+---+---+---+\n"
+                              "  A   B   C\n";
+
+        Board board{};
+
+        board.change_owner_of_square(Square{0, 0}, human_player_id);
+        board.change_owner_of_square(Square{1, 2}, human_player_id);
+        board.change_owner_of_square(Square{0, 1}, ai_player_id);
+        board.change_owner_of_square(Square{2, 0}, ai_player_id);
+
+        CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
+    }
 }
 
 }  // namespace tic_tac_toe
