@@ -51,8 +51,8 @@ TEST_CASE("input/eval_input")
 
             board.change_owner_of_square(Square{0, 1}, 1);
 
-            CHECK(eval_input(board, "a1") != std::nullopt);
-            CHECK(eval_input(board, "a2") == std::nullopt);
+            CHECK(eval_input(board, "1a") != std::nullopt);
+            CHECK(eval_input(board, "1b") == std::nullopt);
         }
 
         SECTION("command belongs to the human player")
@@ -67,12 +67,12 @@ TEST_CASE("input/eval_input")
         {
             const Board board{};
 
-            CHECK(eval_input(board, "a2")->square == Square{0, 1});
-            CHECK(eval_input(board, "2a")->square == Square{0, 1});
-            CHECK(eval_input(board, "b1")->square == Square{1, 0});
-            CHECK(eval_input(board, "1b")->square == Square{1, 0});
-            CHECK(eval_input(board, "B3")->square == Square{1, 2});
-            CHECK(eval_input(board, "3B")->square == Square{1, 2});
+            CHECK(eval_input(board, "1b")->square == Square{0, 1});
+            CHECK(eval_input(board, "b1")->square == Square{0, 1});
+            CHECK(eval_input(board, "2a")->square == Square{1, 0});
+            CHECK(eval_input(board, "a2")->square == Square{1, 0});
+            CHECK(eval_input(board, "2C")->square == Square{1, 2});
+            CHECK(eval_input(board, "C2")->square == Square{1, 2});
         }
     }
 
