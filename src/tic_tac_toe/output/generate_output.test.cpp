@@ -16,7 +16,7 @@ TEST_CASE("output/generate_output")
                               "+---+---+---+\n"
                               "|   |   |   | 3\n"
                               "+---+---+---+\n"
-                              "  1   2   3\n";
+                              "  A   B   C\n";
 
         const Board board{};
 
