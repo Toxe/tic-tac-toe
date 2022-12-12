@@ -50,7 +50,7 @@ jobs:
             - run: ctest --output-on-failure --test-dir build
 
     mac-apple-clang:
-        name: macOS Apple Clang
+        name: macOS AppleClang
         runs-on: macos-latest
         steps:
             - uses: actions/checkout@v3
