@@ -6,6 +6,6 @@
 
 namespace tic_tac_toe {
 
-std::string generate_output(const Board& board);
+std::string show_board(const Board& board);
 
 }  // namespace tic_tac_toe

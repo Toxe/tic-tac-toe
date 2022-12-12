@@ -1,11 +1,11 @@
 #include "catch2/catch_test_macros.hpp"
 #include "catch2/matchers/catch_matchers_string.hpp"
 
-#include "generate_output.hpp"
+#include "show_board.hpp"
 
 namespace tic_tac_toe {
 
-TEST_CASE("output/generate_output")
+TEST_CASE("output/show_board")
 {
     SECTION("empty board")
     {
@@ -20,7 +20,7 @@ TEST_CASE("output/generate_output")
 
         const Board board{};
 
-        CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
+        CHECK_THAT(show_board(board), Catch::Matchers::Equals(s));
     }
 
     SECTION("board with occupied squares")
@@ -41,7 +41,7 @@ TEST_CASE("output/generate_output")
         board.change_owner_of_square(Square{0, 1}, ai_player_id);
         board.change_owner_of_square(Square{2, 0}, ai_player_id);
 
-        CHECK_THAT(generate_output(board), Catch::Matchers::Equals(s));
+        CHECK_THAT(show_board(board), Catch::Matchers::Equals(s));
     }
 }
 

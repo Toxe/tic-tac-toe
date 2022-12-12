@@ -1,4 +1,4 @@
-#include "generate_output.hpp"
+#include "show_board.hpp"
 
 #include <cassert>
 #include <sstream>
@@ -51,7 +51,7 @@ void generate_row(std::stringstream& out, const Board& board, const int row)
     generate_row_number(out, row);
 }
 
-std::string generate_output(const Board& board)
+std::string show_board(const Board& board)
 {
     std::stringstream out;
 

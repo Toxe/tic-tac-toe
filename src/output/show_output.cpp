@@ -2,13 +2,13 @@
 
 #include "fmt/core.h"
 
-#include "generate_output.hpp"
+#include "show_board.hpp"
 
 namespace tic_tac_toe {
 
 void show_output(const Board& board)
 {
-    fmt::print("{}", generate_output(board));
+    fmt::print("{}", show_board(board));
 }
 
 }  // namespace tic_tac_toe
