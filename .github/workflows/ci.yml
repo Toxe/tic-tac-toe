@@ -17,21 +17,21 @@ jobs:
             - run: /bin/bash .ci/build-project.sh
             - run: ctest --output-on-failure --test-dir build
 
-    linux-clang-libcpp:
-        name: Linux Clang (libc++)
-        runs-on: ubuntu-22.04
-        env:
-            CC: clang-14
-            CXX: clang++-14
-            CXXFLAGS: -stdlib=libc++
-        steps:
-            - uses: actions/checkout@v3
-            - run: |
-                  sudo apt-get update
-                  sudo apt-get install -y ninja-build clang-14 libc++-14-dev libc++abi-14-dev
-            - run: /bin/bash .ci/install-vcpkg.sh
-            - run: /bin/bash .ci/build-project.sh
-            - run: ctest --output-on-failure --test-dir build
+#    linux-clang-libcpp:
+#        name: Linux Clang (libc++)
+#        runs-on: ubuntu-22.04
+#        env:
+#            CC: clang-14
+#            CXX: clang++-14
+#            CXXFLAGS: -stdlib=libc++
+#        steps:
+#            - uses: actions/checkout@v3
+#            - run: |
+#                  sudo apt-get update
+#                  sudo apt-get install -y ninja-build clang-14 libc++-14-dev libc++abi-14-dev
+#            - run: /bin/bash .ci/install-vcpkg.sh
+#            - run: /bin/bash .ci/build-project.sh
+#            - run: ctest --output-on-failure --test-dir build
 
     linux-clang-libstdcpp:
         name: Linux Clang (libstdc++)
