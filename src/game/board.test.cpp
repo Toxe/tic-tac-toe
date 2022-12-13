@@ -6,20 +6,13 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/board")
 {
-    SECTION("a new board is empty")
+    SECTION("a new Board is empty")
     {
         const Board board{};
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
                 CHECK(board.empty_square({row, col}));
-    }
-
-    SECTION("a new board is not game over")
-    {
-        const Board board{};
-
-        CHECK(board.game_over() == false);
     }
 
     SECTION("can change owners of squares")
@@ -37,15 +30,23 @@ TEST_CASE("game/board")
         }
     }
 
-    SECTION("a game is over once all squares are owned by players")
+    SECTION("can create Board with data")
     {
-        Board board{};
+        const auto board = Board::with_data({
+            std::array{'x', '-', 'x'},
+            std::array{'x', '-', 'x'},
+            std::array{'-', 'x', '-'},
+        });
 
-        for (int row = 0; row < 3; ++row)
-            for (int col = 0; col < 3; ++col)
-                board.change_owner_of_square({row, col}, human_player_id);
-
-        CHECK(board.game_over());
+        CHECK(board.get_player_of_square(Square{0, 0}) == human_player_id);
+        CHECK(board.get_player_of_square(Square{0, 1}) == ai_player_id);
+        CHECK(board.get_player_of_square(Square{0, 2}) == human_player_id);
+        CHECK(board.get_player_of_square(Square{1, 0}) == human_player_id);
+        CHECK(board.get_player_of_square(Square{1, 1}) == ai_player_id);
+        CHECK(board.get_player_of_square(Square{1, 2}) == human_player_id);
+        CHECK(board.get_player_of_square(Square{2, 0}) == ai_player_id);
+        CHECK(board.get_player_of_square(Square{2, 1}) == human_player_id);
+        CHECK(board.get_player_of_square(Square{2, 2}) == ai_player_id);
     }
 }
 
