@@ -11,7 +11,7 @@ class Board {
 public:
     static Board with_data(const std::array<std::array<char, 3>, 3>& data);
 
-    [[nodiscard]] player_id get_player_of_square(Square square) const;
+    [[nodiscard]] player_id player_of_square(Square square) const;
     [[nodiscard]] bool empty_square(Square square) const;
 
     void change_owner_of_square(Square square, player_id player);

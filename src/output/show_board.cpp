@@ -37,7 +37,7 @@ void generate_cell(std::stringstream& out, const Board& board, const Square squa
     if (board.empty_square(square))
         out << "   ";
     else
-        out << ' ' << player_symbol(board.get_player_of_square(square)) << ' ';
+        out << ' ' << player_symbol(board.player_of_square(square)) << ' ';
 }
 
 void generate_row(std::stringstream& out, const Board& board, const int row)

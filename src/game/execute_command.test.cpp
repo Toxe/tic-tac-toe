@@ -11,10 +11,10 @@ TEST_CASE("game/execute_command")
         Board board{};
 
         execute_command(board, Command{human_player_id, {0, 1}});
-        CHECK(board.get_player_of_square({0, 1}) == human_player_id);
+        CHECK(board.player_of_square({0, 1}) == human_player_id);
 
         execute_command(board, Command{ai_player_id, {1, 2}});
-        CHECK(board.get_player_of_square({1, 2}) == ai_player_id);
+        CHECK(board.player_of_square({1, 2}) == ai_player_id);
     }
 
     SECTION("changing the owner of an already occupied square throws an exception")
