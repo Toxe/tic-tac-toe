@@ -12,6 +12,8 @@ add_library(lib_tic_tac_toe
         game/player.hpp
         game/square.cpp
         game/square.hpp
+        game/win_conditions.cpp
+        game/win_conditions.hpp
         input/eval_input.cpp
         input/eval_input.hpp
         input/receive_player_command.cpp
@@ -20,6 +22,8 @@ add_library(lib_tic_tac_toe
         output/console_output.hpp
         output/show_board.cpp
         output/show_board.hpp
+        output/show_game_over.cpp
+        output/show_game_over.hpp
         )
 
 set_target_properties(lib_tic_tac_toe PROPERTIES CXX_EXTENSIONS OFF)
@@ -48,8 +52,10 @@ if (BUILD_TESTING)
             game/game_state.test.cpp
             game/player.test.cpp
             game/square.test.cpp
+            game/win_conditions.test.cpp
             input/eval_input.test.cpp
             output/show_board.test.cpp
+            output/show_game_over.test.cpp
             )
 
     set_target_properties(tic_tac_toe_tests PROPERTIES CXX_EXTENSIONS OFF)

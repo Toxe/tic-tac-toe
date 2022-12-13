@@ -26,6 +26,16 @@ bool Board::empty_square(const Square square) const
     return player_of_square(square) == 0;
 }
 
+bool Board::has_empty_squares() const
+{
+    for (int row = 0; row < std::ssize(squares_); ++row)
+        for (int col = 0; col < std::ssize(squares_[row]); ++col)
+            if (empty_square({row, col}))
+                return true;
+
+    return false;
+}
+
 void Board::change_owner_of_square(const Square square, player_id player)
 {
     assert(player == human_player_id || player == ai_player_id);

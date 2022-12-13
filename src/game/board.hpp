@@ -13,6 +13,7 @@ public:
 
     [[nodiscard]] player_id player_of_square(Square square) const;
     [[nodiscard]] bool empty_square(Square square) const;
+    [[nodiscard]] bool has_empty_squares() const;
 
     void change_owner_of_square(Square square, player_id player);
 
