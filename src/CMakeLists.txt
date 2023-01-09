@@ -41,28 +41,3 @@ target_compile_features(tic_tac_toe PUBLIC cxx_std_20)
 target_compile_options(tic_tac_toe PRIVATE ${SANITIZER_COMPILE_OPTIONS} ${DEFAULT_COMPILER_OPTIONS} ${DEFAULT_COMPILER_WARNINGS})
 target_link_options(tic_tac_toe PRIVATE ${SANITIZER_LINK_OPTIONS})
 target_link_libraries(tic_tac_toe PRIVATE ${SANITIZER_LINK_LIBRARIES} lib_tic_tac_toe)
-
-# Tests
-if (BUILD_TESTING)
-    add_executable(tic_tac_toe_tests
-            ai/receive_ai_command.test.cpp
-            game/board.test.cpp
-            game/command.test.cpp
-            game/execute_command.test.cpp
-            game/game_state.test.cpp
-            game/player.test.cpp
-            game/square.test.cpp
-            game/win_conditions.test.cpp
-            input/eval_input.test.cpp
-            output/show_board.test.cpp
-            output/show_game_over.test.cpp
-            )
-
-    set_target_properties(tic_tac_toe_tests PROPERTIES CXX_EXTENSIONS OFF)
-    target_compile_features(tic_tac_toe_tests PUBLIC cxx_std_20)
-    target_compile_options(tic_tac_toe_tests PRIVATE ${SANITIZER_COMPILE_OPTIONS} ${DEFAULT_COMPILER_OPTIONS} ${DEFAULT_COMPILER_WARNINGS})
-    target_link_options(tic_tac_toe_tests PRIVATE ${SANITIZER_LINK_OPTIONS})
-    target_link_libraries(tic_tac_toe_tests PRIVATE ${SANITIZER_LINK_LIBRARIES} lib_tic_tac_toe Catch2::Catch2WithMain)
-
-    add_test(NAME tic_tac_toe_tests COMMAND tic_tac_toe_tests)
-endif ()

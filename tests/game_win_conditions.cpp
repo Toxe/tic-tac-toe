@@ -1,6 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
 
-#include "win_conditions.hpp"
+#include "../src/game/win_conditions.hpp"
 
 namespace tic_tac_toe {
 

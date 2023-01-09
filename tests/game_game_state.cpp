@@ -1,6 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
 
-#include "game_state.hpp"
+#include "../src/game/game_state.hpp"
 
 namespace tic_tac_toe {
 

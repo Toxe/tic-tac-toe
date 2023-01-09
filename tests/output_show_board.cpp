@@ -1,7 +1,7 @@
 #include "catch2/catch_test_macros.hpp"
 #include "catch2/matchers/catch_matchers_string.hpp"
 
-#include "show_board.hpp"
+#include "../src/output/show_board.hpp"
 
 namespace tic_tac_toe {
 

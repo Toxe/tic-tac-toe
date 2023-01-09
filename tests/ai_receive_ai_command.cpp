@@ -1,6 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
 
-#include "receive_ai_command.hpp"
+#include "../src/ai/receive_ai_command.hpp"
 
 namespace tic_tac_toe {
 
