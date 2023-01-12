@@ -3,7 +3,7 @@
 #include <optional>
 #include <string>
 
-#include "../game/board.hpp"
+#include "../board/board.hpp"
 #include "../game/command.hpp"
 
 namespace tic_tac_toe {

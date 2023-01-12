@@ -1,12 +1,12 @@
 if(BUILD_TESTING)
     add_executable(tests
         ai_receive_ai_command.cpp
-        game_board.cpp
+        board_board.cpp
+        board_square.cpp
         game_command.cpp
         game_execute_command.cpp
         game_game_state.cpp
         game_player.cpp
-        game_square.cpp
         game_win_conditions.cpp
         input_eval_input.cpp
         output_show_board.cpp

@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "../game/board.hpp"
+#include "../board/board.hpp"
 
 namespace tic_tac_toe {
 

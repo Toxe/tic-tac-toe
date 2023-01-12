@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "player.hpp"
+#include "../game/player.hpp"
 #include "square.hpp"
 
 namespace tic_tac_toe {

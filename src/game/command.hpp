@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../board/square.hpp"
 #include "player.hpp"
-#include "square.hpp"
 
 namespace tic_tac_toe {
 

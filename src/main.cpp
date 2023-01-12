@@ -1,5 +1,5 @@
 #include "ai/receive_ai_command.hpp"
-#include "game/board.hpp"
+#include "board/board.hpp"
 #include "game/execute_command.hpp"
 #include "game/game_state.hpp"
 #include "game/win_conditions.hpp"

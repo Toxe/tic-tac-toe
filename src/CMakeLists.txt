@@ -1,8 +1,10 @@
 add_library(lib_tic_tac_toe
         ai/receive_ai_command.cpp
         ai/receive_ai_command.hpp
-        game/board.cpp
-        game/board.hpp
+        board/board.cpp
+        board/board.hpp
+        board/square.cpp
+        board/square.hpp
         game/command.hpp
         game/execute_command.cpp
         game/execute_command.hpp
@@ -10,8 +12,6 @@ add_library(lib_tic_tac_toe
         game/game_state.hpp
         game/player.cpp
         game/player.hpp
-        game/square.cpp
-        game/square.hpp
         game/win_conditions.cpp
         game/win_conditions.hpp
         input/eval_input.cpp
