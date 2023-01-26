@@ -9,6 +9,8 @@ namespace tic_tac_toe {
 
 class Board {
 public:
+    Board();
+
     static Board with_data(const std::array<std::array<char, 3>, 3>& data);
 
     [[nodiscard]] player_id player_of_square(Square square) const;

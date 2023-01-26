@@ -17,6 +17,12 @@ TEST_CASE("game/player")
         CHECK(player_is_human(ai_player_id) == false);
         CHECK(player_is_ai(ai_player_id) == true);
     }
+
+    SECTION("no player id")
+    {
+        CHECK(player_is_human(no_player_id) == false);
+        CHECK(player_is_ai(no_player_id) == false);
+    }
 }
 
 }  // namespace tic_tac_toe

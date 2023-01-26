@@ -5,6 +5,12 @@
 
 namespace tic_tac_toe {
 
+Board::Board()
+{
+    for (auto& row : squares_)
+        row.fill(no_player_id);
+}
+
 Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
 {
     Board board{};
@@ -23,7 +29,7 @@ player_id Board::player_of_square(Square square) const
 
 bool Board::empty_square(const Square square) const
 {
-    return player_of_square(square) == 0;
+    return player_of_square(square) == no_player_id;
 }
 
 bool Board::has_empty_squares() const
