@@ -17,7 +17,8 @@ Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
 
     for (std::size_t row = 0; row < data.size(); ++row)
         for (std::size_t col = 0; col < data[row].size(); ++col)
-            board.change_owner_of_square(Square{row, col}, data[row][col] == 'x' ? human_player_id : ai_player_id);
+            if (const auto c = data[row][col]; c != '-')
+                board.change_owner_of_square(Square{row, col}, c == 'X' ? human_player_id : ai_player_id);
 
     return board;
 }

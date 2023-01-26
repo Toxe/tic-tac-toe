@@ -15,6 +15,25 @@ TEST_CASE("game/board")
                 CHECK(board.empty_square({row, col}));
     }
 
+    SECTION("can create Board with data")
+    {
+        const auto board = Board::with_data({
+            std::array{'X', 'O', 'X'},
+            std::array{'X', 'O', 'X'},
+            std::array{'O', '-', '-'},
+        });
+
+        CHECK(board.player_of_square({0, 0}) == human_player_id);
+        CHECK(board.player_of_square({0, 1}) == ai_player_id);
+        CHECK(board.player_of_square({0, 2}) == human_player_id);
+        CHECK(board.player_of_square({1, 0}) == human_player_id);
+        CHECK(board.player_of_square({1, 1}) == ai_player_id);
+        CHECK(board.player_of_square({1, 2}) == human_player_id);
+        CHECK(board.player_of_square({2, 0}) == ai_player_id);
+        CHECK(board.player_of_square({2, 1}) == no_player_id);
+        CHECK(board.player_of_square({2, 2}) == no_player_id);
+    }
+
     SECTION("can change owners of squares")
     {
         Board board{};
@@ -50,31 +69,12 @@ TEST_CASE("game/board")
     SECTION("a full Board does not have empty squares")
     {
         const auto board = Board::with_data({
-            std::array{'x', '-', 'x'},
-            std::array{'x', '-', 'x'},
-            std::array{'-', 'x', '-'},
+            std::array{'X', 'O', 'X'},
+            std::array{'X', 'O', 'X'},
+            std::array{'O', 'X', 'O'},
         });
 
         CHECK(board.has_empty_squares() == false);
-    }
-
-    SECTION("can create Board with data")
-    {
-        const auto board = Board::with_data({
-            std::array{'x', '-', 'x'},
-            std::array{'x', '-', 'x'},
-            std::array{'-', 'x', '-'},
-        });
-
-        CHECK(board.player_of_square(Square{0, 0}) == human_player_id);
-        CHECK(board.player_of_square(Square{0, 1}) == ai_player_id);
-        CHECK(board.player_of_square(Square{0, 2}) == human_player_id);
-        CHECK(board.player_of_square(Square{1, 0}) == human_player_id);
-        CHECK(board.player_of_square(Square{1, 1}) == ai_player_id);
-        CHECK(board.player_of_square(Square{1, 2}) == human_player_id);
-        CHECK(board.player_of_square(Square{2, 0}) == ai_player_id);
-        CHECK(board.player_of_square(Square{2, 1}) == human_player_id);
-        CHECK(board.player_of_square(Square{2, 2}) == ai_player_id);
     }
 }
 

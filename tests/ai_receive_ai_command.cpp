@@ -18,13 +18,12 @@ TEST_CASE("ai/receive_ai_command")
 
     SECTION("picks the last remaining empty square")
     {
-        Board board{};
-
-        // fill all but one square
-        for (int row = 0; row < 3; ++row)
-            for (int col = 0; col < 3; ++col)
-                if (!(row == 1 && col == 1))
-                    board.change_owner_of_square({row, col}, human_player_id);
+        // board with one empty square
+        auto board = Board::with_data({
+            std::array{'X', 'O', 'X'},
+            std::array{'X', '-', 'X'},
+            std::array{'O', 'X', 'O'},
+        });
 
         const auto command = receive_ai_command(board);
 
