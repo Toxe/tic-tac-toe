@@ -14,7 +14,7 @@ std::vector<Square> get_all_empty_squares(const Board& board)
     for (int row = 0; row < 3; ++row)
         for (int col = 0; col < 3; ++col)
             if (board.empty_square({row, col}))
-                all_empty_squares.push_back({row, col});
+                all_empty_squares.emplace_back(row, col);
 
     return all_empty_squares;
 }
