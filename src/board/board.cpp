@@ -15,9 +15,9 @@ Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
 {
     Board board{};
 
-    for (int row = 0; row < std::ssize(data); ++row)
-        for (int col = 0; col < std::ssize(data[static_cast<std::size_t>(row)]); ++col)
-            board.change_owner_of_square(Square{row, col}, data[static_cast<std::size_t>(row)][static_cast<std::size_t>(col)] == 'x' ? human_player_id : ai_player_id);
+    for (std::size_t row = 0; row < data.size(); ++row)
+        for (std::size_t col = 0; col < data[row].size(); ++col)
+            board.change_owner_of_square(Square{row, col}, data[row][col] == 'x' ? human_player_id : ai_player_id);
 
     return board;
 }
@@ -34,8 +34,8 @@ bool Board::empty_square(const Square square) const
 
 bool Board::has_empty_squares() const
 {
-    for (int row = 0; row < std::ssize(squares_); ++row)
-        for (int col = 0; col < std::ssize(squares_[static_cast<std::size_t>(row)]); ++col)
+    for (std::size_t row = 0; row < squares_.size(); ++row)
+        for (std::size_t col = 0; col < squares_[row].size(); ++col)
             if (empty_square({row, col}))
                 return true;
 
