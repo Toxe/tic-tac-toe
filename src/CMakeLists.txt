@@ -1,30 +1,34 @@
 add_library(lib_tic_tac_toe
-        ai/receive_ai_command.cpp
-        ai/receive_ai_command.hpp
-        board/board.cpp
-        board/board.hpp
-        board/square.cpp
-        board/square.hpp
-        game/command.hpp
-        game/execute_command.cpp
-        game/execute_command.hpp
-        game/game_state.cpp
-        game/game_state.hpp
-        game/player.cpp
-        game/player.hpp
-        game/win_conditions.cpp
-        game/win_conditions.hpp
-        input/eval_input.cpp
-        input/eval_input.hpp
-        input/receive_player_command.cpp
-        input/receive_player_command.hpp
-        output/console_output.cpp
-        output/console_output.hpp
-        output/show_board.cpp
-        output/show_board.hpp
-        output/show_game_over.cpp
-        output/show_game_over.hpp
-        )
+    ai/receive_ai_command.cpp
+    ai/receive_ai_command.hpp
+    app/app_controller.cpp
+    app/app_controller.hpp
+    app/commands.cpp
+    app/commands.hpp
+    board/board.cpp
+    board/board.hpp
+    board/square.cpp
+    board/square.hpp
+    command/command.hpp
+    game/commands.cpp
+    game/commands.hpp
+    game/game_state.cpp
+    game/game_state.hpp
+    game/player.cpp
+    game/player.hpp
+    game/win_conditions.cpp
+    game/win_conditions.hpp
+    input/eval_input.cpp
+    input/eval_input.hpp
+    input/receive_player_command.cpp
+    input/receive_player_command.hpp
+    output/console_output.cpp
+    output/console_output.hpp
+    output/show_board.cpp
+    output/show_board.hpp
+    output/show_game_over.cpp
+    output/show_game_over.hpp
+)
 
 set_target_properties(lib_tic_tac_toe PROPERTIES CXX_EXTENSIONS OFF)
 target_compile_features(lib_tic_tac_toe PUBLIC cxx_std_20)

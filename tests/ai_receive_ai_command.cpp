@@ -1,18 +1,37 @@
+#include <optional>
+#include <utility>
+
 #include "catch2/catch_test_macros.hpp"
 
 #include "../src/ai/receive_ai_command.hpp"
+#include "../src/app/app_controller.hpp"
 
 namespace tic_tac_toe {
 
+std::optional<Square> find_non_empty_square(const Board& board)
+{
+    for (int row = 0; row < 3; ++row)
+        for (int col = 0; col < 3; ++col)
+            if (!board.empty_square({row, col}))
+                return Square{row, col};
+
+    return {};
+}
+
 TEST_CASE("ai/receive_ai_command")
 {
-    SECTION("picks a square that is not empty")
-    {
-        const Board board{};
+    GameState game_state{};
+    AppController controller{};
 
-        for (int i = 0; i < 10; ++i) {
-            const auto command = receive_ai_command(board);
-            CHECK(board.empty_square(command.square));
+    SECTION("picks a square that is empty")
+    {
+        for (int i = 0; i < 3 * 3; ++i) {
+            Board empty_board{};
+
+            auto command = receive_ai_command(game_state, empty_board);
+            controller.execute(std::move(command));
+
+            CHECK(empty_board.player_of_square(*find_non_empty_square(empty_board)) == ai_player_id);
         }
     }
 
@@ -25,9 +44,10 @@ TEST_CASE("ai/receive_ai_command")
             std::array{'O', 'X', 'O'},
         });
 
-        const auto command = receive_ai_command(board);
+        auto command = receive_ai_command(game_state, board);
+        controller.execute(std::move(command));
 
-        CHECK(command.square == Square{1, 1});
+        CHECK(board.player_of_square({1, 1}) == ai_player_id);
     }
 
     SECTION("throws exception if there are no more empty squares")
@@ -38,15 +58,7 @@ TEST_CASE("ai/receive_ai_command")
             for (int col = 0; col < 3; ++col)
                 board.change_owner_of_square({row, col}, human_player_id);
 
-        CHECK_THROWS(receive_ai_command(board));
-    }
-
-    SECTION("command belongs to the AI player")
-    {
-        const Board board{};
-        const auto command = receive_ai_command(board);
-
-        CHECK(command.player == ai_player_id);
+        CHECK_THROWS(receive_ai_command(game_state, board));
     }
 }
 

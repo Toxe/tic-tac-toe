@@ -49,6 +49,22 @@ TEST_CASE("game/board")
         }
     }
 
+    SECTION("can clear owners of squares")
+    {
+        auto board = Board::with_data({
+            std::array{'X', 'O', 'X'},
+            std::array{'X', 'O', 'X'},
+            std::array{'O', 'X', 'O'},
+        });
+
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 3; ++col) {
+                board.clear_owner_of_square({row, col});
+                CHECK(board.empty_square({row, col}));
+            }
+        }
+    }
+
     SECTION("a new Board has empty squares")
     {
         const Board board{};

@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include "../game/commands.hpp"
+
 namespace tic_tac_toe {
 
 std::vector<Square> get_all_empty_squares(const Board& board)
@@ -30,14 +32,14 @@ Square pick_random_empty_square(const std::vector<Square>& all_empty_squares)
     return all_empty_squares[dist(gen)];
 }
 
-Command receive_ai_command(const Board& board)
+Command receive_ai_command(GameState& game_state, Board& board)
 {
     const auto all_empty_squares = get_all_empty_squares(board);
 
     if (all_empty_squares.empty())
         throw std::invalid_argument("invalid row or column");
 
-    return Command{ai_player_id, pick_random_empty_square(all_empty_squares)};
+    return PlayerMoveCommand(&game_state, &board, ai_player_id, pick_random_empty_square(all_empty_squares));
 }
 
 }  // namespace tic_tac_toe

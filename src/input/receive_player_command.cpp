@@ -12,7 +12,7 @@ std::string read_input()
     std::string input;
 
     while (true) {
-        if (scn::prompt("? ", "{}", input))
+        if (scn::prompt("Your move? (type \"?\" for help) ", "{}", input))
             break;
 
         fmt::print("invalid input\n");
@@ -21,11 +21,11 @@ std::string read_input()
     return input;
 }
 
-Command receive_player_command(const Board& board)
+Command receive_player_command(GameState& game_state, Board& board, AppController& app_controller)
 {
     while (true) {
         const auto input = read_input();
-        const auto command = eval_input(board, input);
+        const auto command = eval_input(game_state, board, app_controller, input);
 
         if (!command)
             fmt::print("invalid input\n");

@@ -2,10 +2,32 @@
 
 #include <cassert>
 
+#include "../app/commands.hpp"
+#include "../game/commands.hpp"
+
 namespace tic_tac_toe {
 
-std::optional<Command> eval_input(const Board& board, const std::string& input)
+std::optional<Command> check_keyword_commands(AppController& app_controller, const std::string& input)
 {
+    if (input == "?" || input == "h" || input == "help")
+        return HelpCommand();
+    else if (input == "q" || input == "quit" || input == "exit")
+        return QuitCommand();
+    else if (input == "u" || input == "undo")
+        return UndoCommand(&app_controller);
+    else if (input == "r" || input == "redo")
+        return RedoCommand(&app_controller);
+
+    return {};
+}
+
+std::optional<Command> eval_input(GameState& game_state, Board& board, AppController& app_controller, const std::string& input)
+{
+    // check for simple keyword commands
+    if (auto command = check_keyword_commands(app_controller, input))
+        return command;
+
+    // check for player move commands
     if (input.size() != 2)
         return {};
 
@@ -21,7 +43,7 @@ std::optional<Command> eval_input(const Board& board, const std::string& input)
     if (!board.empty_square(square))
         return {};
 
-    return Command{human_player_id, square};
+    return PlayerMoveCommand(&game_state, &board, human_player_id, square);
 }
 
 bool is_valid_alphabetic_input_character(const char c)

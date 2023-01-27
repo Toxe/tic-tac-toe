@@ -1,78 +1,104 @@
+#include <utility>
+#include <vector>
+
 #include "catch2/catch_test_macros.hpp"
 
+#include "../src/app/app_controller.hpp"
 #include "../src/input/eval_input.hpp"
 
 namespace tic_tac_toe {
 
 TEST_CASE("input/eval_input")
 {
+    Board board{};
+    GameState game_state{};
+    AppController controller{};
+
     SECTION("eval_input()")
     {
         SECTION("empty input returns an invalid command (nullopt)")
         {
-            const Board board{};
-
-            CHECK(eval_input(board, "") == std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "") == std::nullopt);
         }
 
-        SECTION("input must be one alphabetic character (\"abcABC\") and one digit (\"123\")")
+        SECTION("simple keyword commands")
         {
-            const Board board{};
-
-            CHECK(eval_input(board, "12") == std::nullopt);
-            CHECK(eval_input(board, "32") == std::nullopt);
-            CHECK(eval_input(board, "19") == std::nullopt);
-            CHECK(eval_input(board, "91") == std::nullopt);
-            CHECK(eval_input(board, "99") == std::nullopt);
-            CHECK(eval_input(board, "01") == std::nullopt);
-            CHECK(eval_input(board, "00") == std::nullopt);
-            CHECK(eval_input(board, "44") == std::nullopt);
-            CHECK(eval_input(board, "ab") == std::nullopt);
-            CHECK(eval_input(board, "AB") == std::nullopt);
-            CHECK(eval_input(board, "XY") == std::nullopt);
-            CHECK(eval_input(board, "yz") == std::nullopt);
-            CHECK(eval_input(board, "a") == std::nullopt);
-            CHECK(eval_input(board, "A") == std::nullopt);
-            CHECK(eval_input(board, "1") == std::nullopt);
-            CHECK(eval_input(board, "?") == std::nullopt);
-            CHECK(eval_input(board, "1?") == std::nullopt);
-            CHECK(eval_input(board, "?1") == std::nullopt);
-            CHECK(eval_input(board, "??") == std::nullopt);
-            CHECK(eval_input(board, "???") == std::nullopt);
-            CHECK(eval_input(board, " ") == std::nullopt);
-            CHECK(eval_input(board, "  ") == std::nullopt);
-            CHECK(eval_input(board, "\n") == std::nullopt);
-            CHECK(eval_input(board, "\n\n") == std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "?") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "h") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "q") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "r") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "u") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "exit") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "help") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "quit") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "redo") != std::nullopt);
+            CHECK(eval_input(game_state, board, controller, "undo") != std::nullopt);
         }
 
-        SECTION("square on the board must be empty")
+        SECTION("player move commands")
         {
-            Board board{};
+            SECTION("input must be one alphabetic character (\"abcABC\") and one digit (\"123\")")
+            {
+                CHECK(eval_input(game_state, board, controller, "12") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "32") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "19") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "91") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "99") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "01") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "00") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "44") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "ab") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "AB") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "XY") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "yz") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "a") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "A") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "1") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "1?") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "?1") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "??") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "???") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, " ") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "  ") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "\n") == std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "\n\n") == std::nullopt);
+            }
 
-            board.change_owner_of_square(Square{0, 1}, 1);
+            SECTION("square on the board must be empty")
+            {
+                board.change_owner_of_square(Square{0, 1}, human_player_id);
 
-            CHECK(eval_input(board, "1a") != std::nullopt);
-            CHECK(eval_input(board, "1b") == std::nullopt);
-        }
+                CHECK(eval_input(game_state, board, controller, "1a") != std::nullopt);
+                CHECK(eval_input(game_state, board, controller, "1b") == std::nullopt);
+            }
 
-        SECTION("command belongs to the human player")
-        {
-            const Board board{};
-            const auto command = eval_input(board, "1a");
+            SECTION("command belongs to the human player")
+            {
+                auto command = eval_input(game_state, board, controller, "1a");
+                controller.execute(std::move(*command));
 
-            CHECK(command->player == human_player_id);
-        }
+                CHECK(board.player_of_square({0, 0}) == human_player_id);
+            }
 
-        SECTION("the input characters can be turned around")
-        {
-            const Board board{};
+            SECTION("the input characters can be turned around")
+            {
+                const std::vector<std::pair<const char*, Square>> checks{
+                    {"1b", Square{0, 1}},
+                    {"b1", Square{0, 1}},
+                    {"2a", Square{1, 0}},
+                    {"a2", Square{1, 0}},
+                    {"2C", Square{1, 2}},
+                    {"C2", Square{1, 2}},
+                };
 
-            CHECK(eval_input(board, "1b")->square == Square{0, 1});
-            CHECK(eval_input(board, "b1")->square == Square{0, 1});
-            CHECK(eval_input(board, "2a")->square == Square{1, 0});
-            CHECK(eval_input(board, "a2")->square == Square{1, 0});
-            CHECK(eval_input(board, "2C")->square == Square{1, 2});
-            CHECK(eval_input(board, "C2")->square == Square{1, 2});
+                for (const auto& check : checks) {
+                    Board empty_board{};
+                    auto command = eval_input(game_state, empty_board, controller, check.first);
+                    controller.execute(std::move(*command));
+
+                    CHECK(empty_board.player_of_square(check.second) == human_player_id);
+                }
+            }
         }
     }
 

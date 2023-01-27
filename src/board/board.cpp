@@ -50,4 +50,9 @@ void Board::change_owner_of_square(const Square square, player_id player)
     squares_[static_cast<std::size_t>(square.row)][static_cast<std::size_t>(square.col)] = player;
 }
 
+void Board::clear_owner_of_square(const Square square)
+{
+    squares_[static_cast<std::size_t>(square.row)][static_cast<std::size_t>(square.col)] = no_player_id;
+}
+
 }  // namespace tic_tac_toe

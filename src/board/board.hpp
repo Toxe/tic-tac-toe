@@ -18,6 +18,7 @@ public:
     [[nodiscard]] bool has_empty_squares() const;
 
     void change_owner_of_square(Square square, player_id player);
+    void clear_owner_of_square(Square square);
 
 private:
     std::array<std::array<player_id, 3>, 3> squares_;
