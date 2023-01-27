@@ -5,6 +5,7 @@
 
 #include "../src/ai/receive_ai_command.hpp"
 #include "../src/app/app_controller.hpp"
+#include "../src/output/console_writer.hpp"
 
 namespace tic_tac_toe {
 
@@ -22,13 +23,14 @@ TEST_CASE("ai/receive_ai_command")
 {
     GameState game_state{};
     AppController controller{};
+    ConsoleWriter console_writer{false};
 
     SECTION("picks a square that is empty")
     {
         for (int i = 0; i < 3 * 3; ++i) {
             Board empty_board{};
 
-            auto command = receive_ai_command(game_state, empty_board);
+            auto command = receive_ai_command(game_state, empty_board, console_writer);
             controller.execute(std::move(command));
 
             CHECK(empty_board.player_of_square(*find_non_empty_square(empty_board)) == ai_player_id);
@@ -44,7 +46,7 @@ TEST_CASE("ai/receive_ai_command")
             std::array{'O', 'X', 'O'},
         });
 
-        auto command = receive_ai_command(game_state, board);
+        auto command = receive_ai_command(game_state, board, console_writer);
         controller.execute(std::move(command));
 
         CHECK(board.player_of_square({1, 1}) == ai_player_id);
@@ -58,7 +60,7 @@ TEST_CASE("ai/receive_ai_command")
             for (int col = 0; col < 3; ++col)
                 board.change_owner_of_square({row, col}, human_player_id);
 
-        CHECK_THROWS(receive_ai_command(game_state, board));
+        CHECK_THROWS(receive_ai_command(game_state, board, console_writer));
     }
 }
 

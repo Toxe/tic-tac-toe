@@ -8,7 +8,8 @@ namespace tic_tac_toe {
 
 class Board;
 class GameState;
+class ConsoleWriter;
 
-Command PlayerMoveCommand(GameState* game_state, Board* board, player_id player, Square square);
+Command PlayerMoveCommand(GameState* game_state, Board* board, ConsoleWriter* console_writer, player_id player, Square square);
 
 }  // namespace tic_tac_toe

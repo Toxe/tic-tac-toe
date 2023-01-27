@@ -5,8 +5,9 @@
 namespace tic_tac_toe {
 
 class AppController;
+class ConsoleWriter;
 
-Command HelpCommand();
+Command HelpCommand(ConsoleWriter* console_writer);
 Command QuitCommand();
 Command UndoCommand(AppController* controller);
 Command RedoCommand(AppController* controller);

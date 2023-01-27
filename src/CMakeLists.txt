@@ -22,8 +22,8 @@ add_library(lib_tic_tac_toe
     input/eval_input.hpp
     input/receive_player_command.cpp
     input/receive_player_command.hpp
-    output/console_output.cpp
-    output/console_output.hpp
+    output/console_writer.cpp
+    output/console_writer.hpp
     output/show_board.cpp
     output/show_board.hpp
     output/show_game_over.cpp

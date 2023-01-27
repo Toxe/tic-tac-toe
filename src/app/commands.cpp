@@ -1,22 +1,26 @@
 #include "commands.hpp"
 
 #include <cstdlib>
-
-#include "fmt/core.h"
+#include <string>
 
 #include "../app/app_controller.hpp"
+#include "../output/console_writer.hpp"
 
 namespace tic_tac_toe {
 
-Command HelpCommand()
+Command HelpCommand(ConsoleWriter* console_writer)
 {
     return Command{
-        []() {
-            fmt::print("Enter moves like \"c2\" or \"2c\".\n\n");
-            fmt::print("\"?\", \"h\", \"help\": show help\n");
-            fmt::print("\"q\", \"quit\", \"exit\": quit program\n");
-            fmt::print("\"u\", \"undo\": undo last command\n");
-            fmt::print("\"r\", \"redo\": redo last undo\n");
+        [=]() {
+            std::string output = R"(Enter moves like "c2" or "2c".
+
+"?", "h", "help": show help
+"q", "quit", "exit": quit program
+"u", "undo": undo last command
+"r", "redo": redo last undo
+)";
+
+            console_writer->write(output);
         }};
 }
 
