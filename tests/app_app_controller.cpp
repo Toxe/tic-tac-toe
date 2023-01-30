@@ -14,7 +14,7 @@ Command make_command(int* value, const int add)
 
 TEST_CASE("app/app_controller")
 {
-    AppController controller{};
+    AppController controller;
     int value = 0;
 
     SECTION("execute, undo and redo")

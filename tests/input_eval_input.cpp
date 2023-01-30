@@ -11,9 +11,9 @@ namespace tic_tac_toe {
 
 TEST_CASE("input/eval_input")
 {
-    Board board{};
-    GameState game_state{};
-    AppController controller{};
+    Board board;
+    GameState game_state;
+    AppController controller;
     ConsoleWriter console_writer{false};
 
     SECTION("eval_input()")
@@ -94,7 +94,7 @@ TEST_CASE("input/eval_input")
                 };
 
                 for (const auto& check : checks) {
-                    Board empty_board{};
+                    Board empty_board;
                     auto command = eval_input(game_state, empty_board, controller, console_writer, check.first);
                     controller.execute(std::move(*command));
 

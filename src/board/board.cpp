@@ -13,7 +13,7 @@ Board::Board()
 
 Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
 {
-    Board board{};
+    Board board;
 
     for (std::size_t row = 0; row < data.size(); ++row)
         for (std::size_t col = 0; col < data[row].size(); ++col)

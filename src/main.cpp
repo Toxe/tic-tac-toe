@@ -14,9 +14,9 @@ using namespace tic_tac_toe;
 
 int main()
 {
-    GameState game_state{};
-    Board board{};
-    AppController controller{};
+    GameState game_state;
+    Board board;
+    AppController controller;
     ConsoleWriter console_writer;
 
     while (!game_over(board)) {

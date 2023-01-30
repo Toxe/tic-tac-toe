@@ -13,8 +13,8 @@ public:
     void redo();
 
 private:
-    std::stack<Command> undo_stack_;
-    std::stack<Command> redo_stack_;
+    std::stack<Command> undo_stack_{};
+    std::stack<Command> redo_stack_{};
 };
 
 }  // namespace tic_tac_toe

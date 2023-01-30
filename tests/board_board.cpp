@@ -8,7 +8,7 @@ TEST_CASE("game/board")
 {
     SECTION("a new Board is empty")
     {
-        const Board board{};
+        const Board board;
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
@@ -36,7 +36,7 @@ TEST_CASE("game/board")
 
     SECTION("can change owners of squares")
     {
-        Board board{};
+        Board board;
 
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 3; ++col) {
@@ -67,14 +67,14 @@ TEST_CASE("game/board")
 
     SECTION("a new Board has empty squares")
     {
-        const Board board{};
+        const Board board;
 
         CHECK(board.has_empty_squares());
     }
 
     SECTION("a partially filled Board has empty squares")
     {
-        Board board{};
+        Board board;
 
         board.change_owner_of_square({0, 1}, human_player_id);
         board.change_owner_of_square({1, 2}, ai_player_id);

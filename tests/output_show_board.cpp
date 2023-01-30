@@ -18,7 +18,7 @@ TEST_CASE("output/show_board")
                               "+---+---+---+\n"
                               "  A   B   C\n";
 
-        const Board board{};
+        const Board board;
 
         CHECK_THAT(show_board(board), Catch::Matchers::Equals(s));
     }
@@ -34,7 +34,7 @@ TEST_CASE("output/show_board")
                               "+---+---+---+\n"
                               "  A   B   C\n";
 
-        Board board{};
+        Board board;
 
         board.change_owner_of_square(Square{0, 0}, human_player_id);
         board.change_owner_of_square(Square{1, 2}, human_player_id);

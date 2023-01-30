@@ -7,7 +7,7 @@ namespace tic_tac_toe {
 
 TEST_CASE("app/commands")
 {
-    AppController controller{};
+    AppController controller;
 
     int value = 0;
     auto command = Command{

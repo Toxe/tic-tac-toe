@@ -10,9 +10,9 @@ namespace tic_tac_toe {
 
 TEST_CASE("game/commands")
 {
-    Board board{};
-    GameState game_state{};
-    AppController controller{};
+    Board board;
+    GameState game_state;
+    AppController controller;
     ConsoleWriter console_writer{false};
 
     SECTION("PlayerMoveCommand")

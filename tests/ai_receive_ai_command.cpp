@@ -21,14 +21,14 @@ std::optional<Square> find_non_empty_square(const Board& board)
 
 TEST_CASE("ai/receive_ai_command")
 {
-    GameState game_state{};
-    AppController controller{};
+    GameState game_state;
+    AppController controller;
     ConsoleWriter console_writer{false};
 
     SECTION("picks a square that is empty")
     {
         for (int i = 0; i < 3 * 3; ++i) {
-            Board empty_board{};
+            Board empty_board;
 
             auto command = receive_ai_command(game_state, empty_board, console_writer);
             controller.execute(std::move(command));
@@ -54,7 +54,7 @@ TEST_CASE("ai/receive_ai_command")
 
     SECTION("throws exception if there are no more empty squares")
     {
-        Board board{};
+        Board board;
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
