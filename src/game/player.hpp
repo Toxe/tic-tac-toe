@@ -10,5 +10,6 @@ constexpr player_id ai_player_id = 2;
 
 bool player_is_human(player_id player);
 bool player_is_ai(player_id player);
+bool player_id_is_valid(player_id player);
 
 }  // namespace tic_tac_toe

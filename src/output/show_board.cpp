@@ -5,9 +5,9 @@
 
 namespace tic_tac_toe {
 
-char player_symbol(player_id player)
+char player_symbol(const player_id player)
 {
-    assert(player == human_player_id || player == ai_player_id);
+    assert(player_id_is_valid(player));
 
     return player == human_player_id ? 'X' : 'O';
 }
