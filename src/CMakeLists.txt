@@ -10,6 +10,8 @@ add_library(lib_tic_tac_toe
     board/square.cpp
     board/square.hpp
     command/command.hpp
+    command/command_factory.cpp
+    command/command_factory.hpp
     game/commands.cpp
     game/commands.hpp
     game/game_state.cpp

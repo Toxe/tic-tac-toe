@@ -2,6 +2,7 @@
 
 #include "scn/all.h"
 
+#include "../output/console_writer.hpp"
 #include "eval_input.hpp"
 
 namespace tic_tac_toe {
@@ -20,11 +21,11 @@ std::string read_input(ConsoleWriter& console_writer)
     return input;
 }
 
-Command receive_player_command(GameState& game_state, Board& board, AppController& app_controller, ConsoleWriter& console_writer)
+Command receive_player_command(Board& board, ConsoleWriter& console_writer, CommandFactory& command_factory)
 {
     while (true) {
         const auto input = read_input(console_writer);
-        const auto command = eval_input(game_state, board, app_controller, console_writer, input);
+        const auto command = eval_input(board, command_factory, input);
 
         if (!command)
             console_writer.write("invalid input\n");

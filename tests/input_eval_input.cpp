@@ -4,6 +4,9 @@
 #include "catch2/catch_test_macros.hpp"
 
 #include "../src/app/app_controller.hpp"
+#include "../src/board/board.hpp"
+#include "../src/command/command_factory.hpp"
+#include "../src/game/game_state.hpp"
 #include "../src/input/eval_input.hpp"
 #include "../src/output/console_writer.hpp"
 
@@ -15,68 +18,69 @@ TEST_CASE("input/eval_input")
     GameState game_state;
     AppController controller;
     ConsoleWriter console_writer{false};
+    CommandFactory command_factory{board, game_state, controller, console_writer};
 
     SECTION("eval_input()")
     {
         SECTION("empty input returns an invalid command (nullopt)")
         {
-            CHECK(eval_input(game_state, board, controller, console_writer, "") == std::nullopt);
+            CHECK(eval_input(board, command_factory, "") == std::nullopt);
         }
 
         SECTION("simple keyword commands")
         {
-            CHECK(eval_input(game_state, board, controller, console_writer, "?") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "h") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "q") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "r") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "u") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "exit") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "help") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "quit") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "redo") != std::nullopt);
-            CHECK(eval_input(game_state, board, controller, console_writer, "undo") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "?") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "h") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "q") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "r") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "u") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "exit") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "help") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "quit") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "redo") != std::nullopt);
+            CHECK(eval_input(board, command_factory, "undo") != std::nullopt);
         }
 
         SECTION("player move commands")
         {
             SECTION("input must be one alphabetic character (\"abcABC\") and one digit (\"123\")")
             {
-                CHECK(eval_input(game_state, board, controller, console_writer, "12") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "32") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "19") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "91") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "99") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "01") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "00") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "44") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "ab") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "AB") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "XY") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "yz") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "a") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "A") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "1") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "1?") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "?1") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "??") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "???") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, " ") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "  ") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "\n") == std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "\n\n") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "12") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "32") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "19") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "91") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "99") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "01") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "00") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "44") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "ab") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "AB") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "XY") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "yz") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "a") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "A") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "1") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "1?") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "?1") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "??") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "???") == std::nullopt);
+                CHECK(eval_input(board, command_factory, " ") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "  ") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "\n") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "\n\n") == std::nullopt);
             }
 
             SECTION("square on the board must be empty")
             {
                 board.change_owner_of_square(Square{0, 1}, human_player_id);
 
-                CHECK(eval_input(game_state, board, controller, console_writer, "1a") != std::nullopt);
-                CHECK(eval_input(game_state, board, controller, console_writer, "1b") == std::nullopt);
+                CHECK(eval_input(board, command_factory, "1a") != std::nullopt);
+                CHECK(eval_input(board, command_factory, "1b") == std::nullopt);
             }
 
             SECTION("command belongs to the human player")
             {
-                auto command = eval_input(game_state, board, controller, console_writer, "1a");
+                auto command = eval_input(board, command_factory, "1a");
                 controller.execute(std::move(*command));
 
                 CHECK(board.player_of_square({0, 0}) == human_player_id);
@@ -95,7 +99,9 @@ TEST_CASE("input/eval_input")
 
                 for (const auto& check : checks) {
                     Board empty_board;
-                    auto command = eval_input(game_state, empty_board, controller, console_writer, check.first);
+                    CommandFactory new_command_factory{empty_board, game_state, controller, console_writer};
+
+                    auto command = eval_input(empty_board, new_command_factory, check.first);
                     controller.execute(std::move(*command));
 
                     CHECK(empty_board.player_of_square(check.second) == human_player_id);

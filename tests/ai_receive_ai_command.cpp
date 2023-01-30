@@ -5,6 +5,9 @@
 
 #include "../src/ai/receive_ai_command.hpp"
 #include "../src/app/app_controller.hpp"
+#include "../src/board/board.hpp"
+#include "../src/command/command_factory.hpp"
+#include "../src/game/game_state.hpp"
 #include "../src/output/console_writer.hpp"
 
 namespace tic_tac_toe {
@@ -29,8 +32,9 @@ TEST_CASE("ai/receive_ai_command")
     {
         for (int i = 0; i < 3 * 3; ++i) {
             Board empty_board;
+            CommandFactory command_factory{empty_board, game_state, controller, console_writer};
 
-            auto command = receive_ai_command(game_state, empty_board, console_writer);
+            auto command = receive_ai_command(empty_board, command_factory);
             controller.execute(std::move(command));
 
             CHECK(empty_board.player_of_square(*find_non_empty_square(empty_board)) == ai_player_id);
@@ -45,8 +49,9 @@ TEST_CASE("ai/receive_ai_command")
             std::array{'X', '-', 'X'},
             std::array{'O', 'X', 'O'},
         });
+        CommandFactory command_factory{board, game_state, controller, console_writer};
 
-        auto command = receive_ai_command(game_state, board, console_writer);
+        auto command = receive_ai_command(board, command_factory);
         controller.execute(std::move(command));
 
         CHECK(board.player_of_square({1, 1}) == ai_player_id);
@@ -55,12 +60,13 @@ TEST_CASE("ai/receive_ai_command")
     SECTION("throws exception if there are no more empty squares")
     {
         Board board;
+        CommandFactory command_factory{board, game_state, controller, console_writer};
 
         for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 3; ++col)
                 board.change_owner_of_square({row, col}, human_player_id);
 
-        CHECK_THROWS(receive_ai_command(game_state, board, console_writer));
+        CHECK_THROWS(receive_ai_command(board, command_factory));
     }
 }
 

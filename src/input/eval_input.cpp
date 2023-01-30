@@ -2,29 +2,29 @@
 
 #include <cassert>
 
-#include "../app/commands.hpp"
-#include "../game/commands.hpp"
+#include "../board/board.hpp"
+#include "../command/command_factory.hpp"
 
 namespace tic_tac_toe {
 
-std::optional<Command> check_keyword_commands(AppController& app_controller, ConsoleWriter& console_writer, const std::string& input)
+std::optional<Command> check_keyword_commands(CommandFactory& command_factory, const std::string& input)
 {
     if (input == "?" || input == "h" || input == "help")
-        return HelpCommand(&console_writer);
+        return command_factory.create_help_command();
     else if (input == "q" || input == "quit" || input == "exit")
-        return QuitCommand();
+        return command_factory.create_quit_command();
     else if (input == "u" || input == "undo")
-        return UndoCommand(&app_controller);
+        return command_factory.create_undo_command();
     else if (input == "r" || input == "redo")
-        return RedoCommand(&app_controller);
+        return command_factory.create_redo_command();
 
     return {};
 }
 
-std::optional<Command> eval_input(GameState& game_state, Board& board, AppController& app_controller, ConsoleWriter& console_writer, const std::string& input)
+std::optional<Command> eval_input(Board& board, CommandFactory& command_factory, const std::string& input)
 {
     // check for simple keyword commands
-    if (auto command = check_keyword_commands(app_controller, console_writer, input))
+    if (auto command = check_keyword_commands(command_factory, input))
         return command;
 
     // check for player move commands
@@ -43,7 +43,7 @@ std::optional<Command> eval_input(GameState& game_state, Board& board, AppContro
     if (!board.empty_square(square))
         return {};
 
-    return PlayerMoveCommand(&game_state, &board, &console_writer, human_player_id, square);
+    return command_factory.create_player_move_command(human_player_id, square);
 }
 
 bool is_valid_alphabetic_input_character(const char c)
