@@ -12,7 +12,7 @@ Command HelpCommand(ConsoleWriter* console_writer)
 {
     return Command{
         [=]() {
-            std::string output = R"(Enter moves like "c2" or "2c".
+            const std::string output = R"(Enter moves like "c2" or "2c".
 
 "?", "h", "help": show help
 "q", "quit", "exit": quit program
