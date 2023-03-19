@@ -42,9 +42,9 @@ void generate_cell(std::stringstream& out, const Board& board, const Square squa
 
 void generate_row(std::stringstream& out, const Board& board, const int row)
 {
-    for (int col = 0; col < 3; ++col) {
+    for (int col = 0; col < board.cols(); ++col) {
         generate_vertical_line(out);
-        generate_cell(out, board, {row, col});
+        generate_cell(out, board, {col, row});
     }
 
     generate_vertical_line(out);
@@ -55,7 +55,7 @@ std::string show_board(const Board& board)
 {
     std::stringstream out;
 
-    for (int row = 0; row < 3; ++row) {
+    for (int row = 0; row < board.rows(); ++row) {
         generate_horizontal_line(out);
         generate_row(out, board, row);
     }

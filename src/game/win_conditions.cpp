@@ -23,8 +23,8 @@ WinCondition get_win_condition(const Board& board)
 
 bool has_winning_row(const Board& board, const player_id player)
 {
-    for (int row = 0; row < 3; ++row)
-        if (board.player_of_square(Square{row, 0}) == player && board.player_of_square(Square{row, 1}) == player && board.player_of_square(Square{row, 2}) == player)
+    for (int row = 0; row < board.rows(); ++row)
+        if (board.all_squares_in_row_belong_to(row, player))
             return true;
 
     return false;
@@ -32,8 +32,8 @@ bool has_winning_row(const Board& board, const player_id player)
 
 bool has_winning_column(const Board& board, const player_id player)
 {
-    for (int col = 0; col < 3; ++col)
-        if (board.player_of_square(Square{0, col}) == player && board.player_of_square(Square{1, col}) == player && board.player_of_square(Square{2, col}) == player)
+    for (int col = 0; col < board.cols(); ++col)
+        if (board.all_squares_in_col_belong_to(col, player))
             return true;
 
     return false;
@@ -44,7 +44,7 @@ bool has_winning_diagonal(const Board& board, const player_id player)
     if (board.player_of_square(Square{0, 0}) == player && board.player_of_square(Square{1, 1}) == player && board.player_of_square(Square{2, 2}) == player)
         return true;
 
-    if (board.player_of_square(Square{2, 0}) == player && board.player_of_square(Square{1, 1}) == player && board.player_of_square(Square{0, 2}) == player)
+    if (board.player_of_square(Square{0, 2}) == player && board.player_of_square(Square{1, 1}) == player && board.player_of_square(Square{2, 0}) == player)
         return true;
 
     return false;

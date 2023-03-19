@@ -14,10 +14,10 @@ namespace tic_tac_toe {
 
 std::optional<Square> find_non_empty_square(const Board& board)
 {
-    for (int row = 0; row < 3; ++row)
-        for (int col = 0; col < 3; ++col)
-            if (!board.empty_square({row, col}))
-                return Square{row, col};
+    for (int row = 0; row < board.rows(); ++row)
+        for (int col = 0; col < board.cols(); ++col)
+            if (!board.empty_square({col, row}))
+                return Square{col, row};
 
     return {};
 }
@@ -59,12 +59,13 @@ TEST_CASE("ai/receive_ai_command")
 
     SECTION("throws exception if there are no more empty squares")
     {
-        Board board;
+        // filled board
+        auto board = Board::with_data({
+            std::array{'X', 'X', 'X'},
+            std::array{'X', 'X', 'X'},
+            std::array{'X', 'X', 'X'},
+        });
         CommandFactory command_factory{board, game_state, controller, console_writer};
-
-        for (int row = 0; row < 3; ++row)
-            for (int col = 0; col < 3; ++col)
-                board.change_owner_of_square({row, col}, human_player_id);
 
         CHECK_THROWS(receive_ai_command(board, command_factory));
     }

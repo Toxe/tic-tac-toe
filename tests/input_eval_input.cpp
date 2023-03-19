@@ -72,7 +72,7 @@ TEST_CASE("input/eval_input")
 
             SECTION("square on the board must be empty")
             {
-                board.change_owner_of_square(Square{0, 1}, human_player_id);
+                board.change_owner_of_square(Square{1, 0}, human_player_id);
 
                 CHECK(eval_input(board, command_factory, "1a") != std::nullopt);
                 CHECK(eval_input(board, command_factory, "1b") == std::nullopt);
@@ -89,12 +89,12 @@ TEST_CASE("input/eval_input")
             SECTION("the input characters can be turned around")
             {
                 const std::vector<std::pair<const char*, Square>> checks{
-                    {"1b", Square{0, 1}},
-                    {"b1", Square{0, 1}},
-                    {"2a", Square{1, 0}},
-                    {"a2", Square{1, 0}},
-                    {"2C", Square{1, 2}},
-                    {"C2", Square{1, 2}},
+                    {"1b", Square{1, 0}},
+                    {"b1", Square{1, 0}},
+                    {"2a", Square{0, 1}},
+                    {"a2", Square{0, 1}},
+                    {"2C", Square{2, 1}},
+                    {"C2", Square{2, 1}},
                 };
 
                 for (const auto& check : checks) {

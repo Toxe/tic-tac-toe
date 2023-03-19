@@ -14,10 +14,10 @@ std::vector<Square> get_all_empty_squares(const Board& board)
 {
     std::vector<Square> all_empty_squares;
 
-    for (int row = 0; row < 3; ++row)
-        for (int col = 0; col < 3; ++col)
-            if (board.empty_square({row, col}))
-                all_empty_squares.emplace_back(row, col);
+    for (int row = 0; row < board.rows(); ++row)
+        for (int col = 0; col < board.cols(); ++col)
+            if (board.empty_square({col, row}))
+                all_empty_squares.emplace_back(col, row);
 
     return all_empty_squares;
 }

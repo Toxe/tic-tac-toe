@@ -34,9 +34,9 @@ std::optional<Command> eval_input(Board& board, CommandFactory& command_factory,
     Square square;
 
     if (is_valid_alphabetic_input_character(input[0]) && is_valid_numeric_input_character(input[1]))
-        square = Square{convert_input_character_to_square_coord(input[1]), convert_input_character_to_square_coord(input[0])};
-    else if (is_valid_alphabetic_input_character(input[1]) && is_valid_numeric_input_character(input[0]))
         square = Square{convert_input_character_to_square_coord(input[0]), convert_input_character_to_square_coord(input[1])};
+    else if (is_valid_alphabetic_input_character(input[1]) && is_valid_numeric_input_character(input[0]))
+        square = Square{convert_input_character_to_square_coord(input[1]), convert_input_character_to_square_coord(input[0])};
     else
         return {};
 

@@ -10,6 +10,9 @@ if(BUILD_TESTING)
         game_game_state.cpp
         game_player.cpp
         game_win_conditions.cpp
+        grid_coords.cpp
+        grid_grid.cpp
+        grid_gridcell.cpp
         input_eval_input.cpp
         output_show_board.cpp
         output_show_game_over.cpp
