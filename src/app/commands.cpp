@@ -14,10 +14,10 @@ Command HelpCommand(ConsoleWriter* console_writer)
         [=]() {
             const std::string output = R"(Enter moves like "c2" or "2c".
 
-"?", "h", "help": show help
-"q", "quit", "exit": quit program
-"u", "undo": undo last command
-"r", "redo": redo last undo
+(?), (h), (help): show help
+(q), (quit), (exit): quit program
+(u), (undo): undo last command
+(r), (redo): redo last undo
 )";
 
             console_writer->write(output);
