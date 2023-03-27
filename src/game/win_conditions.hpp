@@ -7,8 +7,8 @@ namespace tic_tac_toe {
 enum class WinCondition {
     none,
     draw,
-    human_player_won,
-    ai_player_won,
+    player1_won,
+    player2_won,
 };
 
 [[nodiscard]] bool game_over(const Board& board);

@@ -8,26 +8,24 @@ TEST_CASE("game/player")
 {
     SECTION("check if player is human")
     {
-        CHECK(player_is_human(human_player_id) == true);
-        CHECK(player_is_ai(human_player_id) == false);
+        PlayerInfo player_info{player1_id, PlayerType::human};
+
+        CHECK(player_is_human(player_info) == true);
+        CHECK(player_is_ai(player_info) == false);
     }
 
     SECTION("check if player is AI")
     {
-        CHECK(player_is_human(ai_player_id) == false);
-        CHECK(player_is_ai(ai_player_id) == true);
-    }
+        PlayerInfo player_info{player2_id, PlayerType::ai};
 
-    SECTION("no player id")
-    {
-        CHECK(player_is_human(no_player_id) == false);
-        CHECK(player_is_ai(no_player_id) == false);
+        CHECK(player_is_human(player_info) == false);
+        CHECK(player_is_ai(player_info) == true);
     }
 
     SECTION("check if player id is valid")
     {
-        CHECK(player_id_is_valid(human_player_id) == true);
-        CHECK(player_id_is_valid(ai_player_id) == true);
+        CHECK(player_id_is_valid(player1_id) == true);
+        CHECK(player_id_is_valid(player2_id) == true);
         CHECK(player_id_is_valid(no_player_id) == false);
     }
 }

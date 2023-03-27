@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+#include "fmt/core.h"
+
 namespace tic_tac_toe {
 
 std::string generate_ongoing_game()
@@ -14,14 +16,9 @@ std::string generate_draw()
     return "Draw!";
 }
 
-std::string generate_human_player_victory()
+std::string generate_player_victory(const player_id player)
 {
-    return "You won!";
-}
-
-std::string generate_ai_player_victory()
-{
-    return "You lost!";
+    return fmt::format("Player {} won!", player);
 }
 
 std::string show_game_over(const WinCondition win_condition)
@@ -29,8 +26,8 @@ std::string show_game_over(const WinCondition win_condition)
     switch (win_condition) {
         case WinCondition::none: return generate_ongoing_game();
         case WinCondition::draw: return generate_draw();
-        case WinCondition::human_player_won: return generate_human_player_victory();
-        case WinCondition::ai_player_won: return generate_ai_player_victory();
+        case WinCondition::player1_won: return generate_player_victory(player1_id);
+        case WinCondition::player2_won: return generate_player_victory(player2_id);
         default:
             throw std::runtime_error{"invalid win condition"};
     }

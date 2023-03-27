@@ -36,10 +36,10 @@ TEST_CASE("output/show_board")
 
         Board board;
 
-        board.change_owner_of_square(Square{0, 0}, human_player_id);
-        board.change_owner_of_square(Square{2, 1}, human_player_id);
-        board.change_owner_of_square(Square{1, 0}, ai_player_id);
-        board.change_owner_of_square(Square{0, 2}, ai_player_id);
+        board.change_owner_of_square(Square{0, 0}, player1_id);
+        board.change_owner_of_square(Square{2, 1}, player1_id);
+        board.change_owner_of_square(Square{1, 0}, player2_id);
+        board.change_owner_of_square(Square{0, 2}, player2_id);
 
         CHECK_THAT(show_board(board), Catch::Matchers::Equals(s));
     }

@@ -17,14 +17,14 @@ TEST_CASE("output/show_game_over")
         CHECK_THAT(show_game_over(WinCondition::draw), Catch::Matchers::Equals("Draw!"));
     }
 
-    SECTION("human player won")
+    SECTION("player 1 won")
     {
-        CHECK_THAT(show_game_over(WinCondition::human_player_won), Catch::Matchers::Equals("You won!"));
+        CHECK_THAT(show_game_over(WinCondition::player1_won), Catch::Matchers::Equals("Player 1 won!"));
     }
 
-    SECTION("AI player won")
+    SECTION("player 2 won")
     {
-        CHECK_THAT(show_game_over(WinCondition::ai_player_won), Catch::Matchers::Equals("You lost!"));
+        CHECK_THAT(show_game_over(WinCondition::player2_won), Catch::Matchers::Equals("Player 2 won!"));
     }
 }
 

@@ -30,13 +30,13 @@ TEST_CASE("game/win_conditions")
             std::array{'O', 'X', 'O'},
         });
 
-        const auto human_player_won_board = Board::with_data({
+        const auto player1_won_board = Board::with_data({
             std::array{'O', 'X', 'O'},
             std::array{'X', 'X', 'X'},
             std::array{'X', 'O', 'O'},
         });
 
-        const auto ai_player_won_board = Board::with_data({
+        const auto player2_won_board = Board::with_data({
             std::array{'X', 'O', 'X'},
             std::array{'O', 'O', 'O'},
             std::array{'O', 'X', 'X'},
@@ -44,8 +44,8 @@ TEST_CASE("game/win_conditions")
 
         CHECK(game_over(Board{}) == false);
         CHECK(game_over(draw_board));
-        CHECK(game_over(human_player_won_board));
-        CHECK(game_over(ai_player_won_board));
+        CHECK(game_over(player1_won_board));
+        CHECK(game_over(player2_won_board));
     }
 
     SECTION("check rows")
@@ -68,12 +68,12 @@ TEST_CASE("game/win_conditions")
             std::array{'X', 'X', 'X'},
         });
 
-        CHECK(check_player_victory(board1, human_player_id));
-        CHECK(check_player_victory(board2, human_player_id));
-        CHECK(check_player_victory(board3, human_player_id));
-        CHECK(check_player_victory(board1, ai_player_id) == false);
-        CHECK(check_player_victory(board2, ai_player_id) == false);
-        CHECK(check_player_victory(board3, ai_player_id) == false);
+        CHECK(check_player_victory(board1, player1_id));
+        CHECK(check_player_victory(board2, player1_id));
+        CHECK(check_player_victory(board3, player1_id));
+        CHECK(check_player_victory(board1, player2_id) == false);
+        CHECK(check_player_victory(board2, player2_id) == false);
+        CHECK(check_player_victory(board3, player2_id) == false);
     }
 
     SECTION("check columns")
@@ -96,12 +96,12 @@ TEST_CASE("game/win_conditions")
             std::array{'O', 'X', 'X'},
         });
 
-        CHECK(check_player_victory(board1, human_player_id));
-        CHECK(check_player_victory(board2, human_player_id));
-        CHECK(check_player_victory(board3, human_player_id));
-        CHECK(check_player_victory(board1, ai_player_id) == false);
-        CHECK(check_player_victory(board2, ai_player_id) == false);
-        CHECK(check_player_victory(board3, ai_player_id) == false);
+        CHECK(check_player_victory(board1, player1_id));
+        CHECK(check_player_victory(board2, player1_id));
+        CHECK(check_player_victory(board3, player1_id));
+        CHECK(check_player_victory(board1, player2_id) == false);
+        CHECK(check_player_victory(board2, player2_id) == false);
+        CHECK(check_player_victory(board3, player2_id) == false);
     }
 
     SECTION("check diagonals")
@@ -118,10 +118,10 @@ TEST_CASE("game/win_conditions")
             std::array{'X', 'O', 'O'},
         });
 
-        CHECK(check_player_victory(board1, human_player_id));
-        CHECK(check_player_victory(board2, human_player_id));
-        CHECK(check_player_victory(board1, ai_player_id) == false);
-        CHECK(check_player_victory(board2, ai_player_id) == false);
+        CHECK(check_player_victory(board1, player1_id));
+        CHECK(check_player_victory(board2, player1_id));
+        CHECK(check_player_victory(board1, player2_id) == false);
+        CHECK(check_player_victory(board2, player2_id) == false);
     }
 }
 

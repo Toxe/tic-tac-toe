@@ -16,16 +16,18 @@ using namespace tic_tac_toe;
 int main()
 {
     Board board;
-    GameState game_state;
+    GameState game_state{PlayerType::human, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
     CommandFactory command_factory{board, game_state, controller, console_writer};
 
     while (!game_over(board)) {
-        if (game_state.current_player() == human_player_id)
+        const PlayerInfo player = game_state.current_player();
+
+        if (player_is_human(player))
             console_writer.write(show_board(board));
 
-        auto command = (player_is_human(game_state.current_player())) ? receive_player_command(board, console_writer, command_factory) : receive_ai_command(board, command_factory);
+        auto command = (player_is_human(player)) ? receive_player_command(player.id, board, console_writer, command_factory) : receive_ai_command(player.id, board, command_factory);
         controller.execute(std::move(command));
     }
 

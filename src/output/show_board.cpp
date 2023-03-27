@@ -9,7 +9,7 @@ char player_symbol(const player_id player)
 {
     assert(player_id_is_valid(player));
 
-    return player == human_player_id ? 'X' : 'O';
+    return player == player1_id ? 'X' : 'O';
 }
 
 void generate_horizontal_line(std::stringstream& out)

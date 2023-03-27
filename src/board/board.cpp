@@ -12,7 +12,7 @@ Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
     for (int row = 0; row < board.rows(); ++row)
         for (int col = 0; col < board.cols(); ++col)
             if (const auto c = data[static_cast<std::size_t>(row)][static_cast<std::size_t>(col)]; c != '-')
-                board.change_owner_of_square(Square{col, row}, c == 'X' ? human_player_id : ai_player_id);
+                board.change_owner_of_square(Square{col, row}, c == 'X' ? player1_id : player2_id);
 
     return board;
 }

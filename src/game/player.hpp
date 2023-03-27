@@ -5,11 +5,21 @@ namespace tic_tac_toe {
 using player_id = int;
 
 constexpr player_id no_player_id = 0;
-constexpr player_id human_player_id = 1;
-constexpr player_id ai_player_id = 2;
+constexpr player_id player1_id = 1;
+constexpr player_id player2_id = 2;
 
-bool player_is_human(player_id player);
-bool player_is_ai(player_id player);
+enum class PlayerType {
+    human,
+    ai
+};
+
+struct PlayerInfo {
+    player_id id;
+    PlayerType type;
+};
+
+bool player_is_human(const PlayerInfo& player_info);
+bool player_is_ai(const PlayerInfo& player_info);
 bool player_id_is_valid(player_id player);
 
 }  // namespace tic_tac_toe

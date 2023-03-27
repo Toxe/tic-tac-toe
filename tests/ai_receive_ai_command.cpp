@@ -24,7 +24,7 @@ std::optional<Square> find_non_empty_square(const Board& board)
 
 TEST_CASE("ai/receive_ai_command")
 {
-    GameState game_state;
+    GameState game_state{PlayerType::human, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer{false};
 
@@ -34,10 +34,10 @@ TEST_CASE("ai/receive_ai_command")
             Board empty_board;
             CommandFactory command_factory{empty_board, game_state, controller, console_writer};
 
-            auto command = receive_ai_command(empty_board, command_factory);
+            auto command = receive_ai_command(player2_id, empty_board, command_factory);
             controller.execute(std::move(command));
 
-            CHECK(empty_board.player_of_square(*find_non_empty_square(empty_board)) == ai_player_id);
+            CHECK(empty_board.player_of_square(*find_non_empty_square(empty_board)) == player2_id);
         }
     }
 
@@ -51,10 +51,28 @@ TEST_CASE("ai/receive_ai_command")
         });
         CommandFactory command_factory{board, game_state, controller, console_writer};
 
-        auto command = receive_ai_command(board, command_factory);
+        auto command = receive_ai_command(player2_id, board, command_factory);
         controller.execute(std::move(command));
 
-        CHECK(board.player_of_square({1, 1}) == ai_player_id);
+        CHECK(board.player_of_square({1, 1}) == player2_id);
+    }
+
+    SECTION("can receive commands for player 1 and 2")
+    {
+        for (player_id player = player1_id; player <= player2_id; ++player) {
+            // board with one empty square
+            auto board = Board::with_data({
+                std::array{'X', 'O', 'X'},
+                std::array{'X', '-', 'X'},
+                std::array{'O', 'X', 'O'},
+            });
+            CommandFactory command_factory{board, game_state, controller, console_writer};
+
+            auto command = receive_ai_command(player, board, command_factory);
+            controller.execute(std::move(command));
+
+            CHECK(board.player_of_square({1, 1}) == player);
+        }
     }
 
     SECTION("throws exception if there are no more empty squares")
@@ -67,7 +85,7 @@ TEST_CASE("ai/receive_ai_command")
         });
         CommandFactory command_factory{board, game_state, controller, console_writer};
 
-        CHECK_THROWS(receive_ai_command(board, command_factory));
+        CHECK_THROWS(receive_ai_command(player2_id, board, command_factory));
     }
 }
 

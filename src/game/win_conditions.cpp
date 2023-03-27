@@ -9,11 +9,11 @@ bool game_over(const Board& board)
 
 WinCondition get_win_condition(const Board& board)
 {
-    if (check_player_victory(board, human_player_id))
-        return WinCondition::human_player_won;
+    if (check_player_victory(board, player1_id))
+        return WinCondition::player1_won;
 
-    if (check_player_victory(board, ai_player_id))
-        return WinCondition::ai_player_won;
+    if (check_player_victory(board, player2_id))
+        return WinCondition::player2_won;
 
     if (!board.has_empty_squares())
         return WinCondition::draw;

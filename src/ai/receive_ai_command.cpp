@@ -33,14 +33,14 @@ Square pick_random_empty_square(const std::vector<Square>& all_empty_squares)
     return all_empty_squares[dist(gen)];
 }
 
-Command receive_ai_command(const Board& board, CommandFactory& command_factory)
+Command receive_ai_command(const player_id player, const Board& board, CommandFactory& command_factory)
 {
     const auto all_empty_squares = get_all_empty_squares(board);
 
     if (all_empty_squares.empty())
         throw std::invalid_argument("invalid row or column");
 
-    return command_factory.create_player_move_command(ai_player_id, pick_random_empty_square(all_empty_squares));
+    return command_factory.create_player_move_command(player, pick_random_empty_square(all_empty_squares));
 }
 
 }  // namespace tic_tac_toe

@@ -4,13 +4,14 @@
 #include <string>
 
 #include "../command/command.hpp"
+#include "../game/player.hpp"
 
 namespace tic_tac_toe {
 
 class Board;
 class CommandFactory;
 
-std::optional<Command> eval_input(Board& board, CommandFactory& command_factory, const std::string& input);
+std::optional<Command> eval_input(player_id player, Board& board, CommandFactory& command_factory, const std::string& input);
 
 bool is_valid_alphabetic_input_character(char c);
 bool is_valid_numeric_input_character(char c);

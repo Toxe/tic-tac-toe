@@ -23,13 +23,13 @@ TEST_CASE("game/board")
             std::array{'O', '-', '-'},
         });
 
-        CHECK(board.player_of_square({0, 0}) == human_player_id);
-        CHECK(board.player_of_square({1, 0}) == ai_player_id);
-        CHECK(board.player_of_square({2, 0}) == human_player_id);
-        CHECK(board.player_of_square({0, 1}) == human_player_id);
-        CHECK(board.player_of_square({1, 1}) == ai_player_id);
-        CHECK(board.player_of_square({2, 1}) == human_player_id);
-        CHECK(board.player_of_square({0, 2}) == ai_player_id);
+        CHECK(board.player_of_square({0, 0}) == player1_id);
+        CHECK(board.player_of_square({1, 0}) == player2_id);
+        CHECK(board.player_of_square({2, 0}) == player1_id);
+        CHECK(board.player_of_square({0, 1}) == player1_id);
+        CHECK(board.player_of_square({1, 1}) == player2_id);
+        CHECK(board.player_of_square({2, 1}) == player1_id);
+        CHECK(board.player_of_square({0, 2}) == player2_id);
         CHECK(board.player_of_square({1, 2}) == no_player_id);
         CHECK(board.player_of_square({2, 2}) == no_player_id);
     }
@@ -50,11 +50,11 @@ TEST_CASE("game/board")
 
         for (int row = 0; row < board.rows(); ++row) {
             for (int col = 0; col < board.cols(); ++col) {
-                board.change_owner_of_square({col, row}, human_player_id);
-                CHECK(board.player_of_square({col, row}) == human_player_id);
+                board.change_owner_of_square({col, row}, player1_id);
+                CHECK(board.player_of_square({col, row}) == player1_id);
 
-                board.change_owner_of_square({col, row}, ai_player_id);
-                CHECK(board.player_of_square({col, row}) == ai_player_id);
+                board.change_owner_of_square({col, row}, player2_id);
+                CHECK(board.player_of_square({col, row}) == player2_id);
             }
         }
     }
@@ -86,8 +86,8 @@ TEST_CASE("game/board")
     {
         Board board;
 
-        board.change_owner_of_square({0, 1}, human_player_id);
-        board.change_owner_of_square({1, 2}, ai_player_id);
+        board.change_owner_of_square({0, 1}, player1_id);
+        board.change_owner_of_square({1, 2}, player2_id);
 
         CHECK(board.has_empty_squares());
     }
@@ -111,14 +111,14 @@ TEST_CASE("game/board")
             std::array{'X', 'O', '-'},
         });
 
-        CHECK(board.all_squares_in_col_belong_to(0, human_player_id));
-        CHECK(board.all_squares_in_col_belong_to(1, ai_player_id));
+        CHECK(board.all_squares_in_col_belong_to(0, player1_id));
+        CHECK(board.all_squares_in_col_belong_to(1, player2_id));
 
         CHECK(board.all_squares_in_col_belong_to(0, no_player_id) == false);
         CHECK(board.all_squares_in_col_belong_to(1, no_player_id) == false);
 
-        CHECK(board.all_squares_in_col_belong_to(2, human_player_id) == false);
-        CHECK(board.all_squares_in_col_belong_to(2, ai_player_id) == false);
+        CHECK(board.all_squares_in_col_belong_to(2, player1_id) == false);
+        CHECK(board.all_squares_in_col_belong_to(2, player2_id) == false);
         CHECK(board.all_squares_in_col_belong_to(2, no_player_id) == false);
     }
 
@@ -130,14 +130,14 @@ TEST_CASE("game/board")
             std::array{'X', 'O', '-'},
         });
 
-        CHECK(board.all_squares_in_row_belong_to(0, human_player_id));
-        CHECK(board.all_squares_in_row_belong_to(1, ai_player_id));
+        CHECK(board.all_squares_in_row_belong_to(0, player1_id));
+        CHECK(board.all_squares_in_row_belong_to(1, player2_id));
 
         CHECK(board.all_squares_in_row_belong_to(0, no_player_id) == false);
         CHECK(board.all_squares_in_row_belong_to(1, no_player_id) == false);
 
-        CHECK(board.all_squares_in_row_belong_to(2, human_player_id) == false);
-        CHECK(board.all_squares_in_row_belong_to(2, ai_player_id) == false);
+        CHECK(board.all_squares_in_row_belong_to(2, player1_id) == false);
+        CHECK(board.all_squares_in_row_belong_to(2, player2_id) == false);
         CHECK(board.all_squares_in_row_belong_to(2, no_player_id) == false);
     }
 }
