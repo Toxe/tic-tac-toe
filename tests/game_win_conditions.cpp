@@ -13,34 +13,34 @@ TEST_CASE("game/win_conditions")
 
     SECTION("a draw is a full board without a winning player")
     {
-        const auto board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        const auto board = Board{
+            "XOX",
+            "XOX",
+            "OXO",
+        };
 
         CHECK(get_win_condition(board) == WinCondition::draw);
     }
 
     SECTION("a game is over if it is either a draw or a player has won")
     {
-        const auto draw_board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        const auto draw_board = Board{
+            "XOX",
+            "XOX",
+            "OXO",
+        };
 
-        const auto player1_won_board = Board::with_data({
-            std::array{'O', 'X', 'O'},
-            std::array{'X', 'X', 'X'},
-            std::array{'X', 'O', 'O'},
-        });
+        const auto player1_won_board = Board{
+            "OXO",
+            "XXX",
+            "XOO",
+        };
 
-        const auto player2_won_board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'O', 'O'},
-            std::array{'O', 'X', 'X'},
-        });
+        const auto player2_won_board = Board{
+            "XOX",
+            "OOO",
+            "OXX",
+        };
 
         CHECK(game_over(Board{}) == false);
         CHECK(game_over(draw_board));
@@ -50,23 +50,23 @@ TEST_CASE("game/win_conditions")
 
     SECTION("check rows")
     {
-        const auto board1 = Board::with_data({
-            std::array{'X', 'X', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        const auto board1 = Board{
+            "XXX",
+            "XOX",
+            "OXO",
+        };
 
-        const auto board2 = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'X', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        const auto board2 = Board{
+            "XOX",
+            "XXX",
+            "OXO",
+        };
 
-        const auto board3 = Board::with_data({
-            std::array{'O', 'X', 'O'},
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'X', 'X'},
-        });
+        const auto board3 = Board{
+            "OXO",
+            "XOX",
+            "XXX",
+        };
 
         CHECK(check_player_victory(board1, player1_id));
         CHECK(check_player_victory(board2, player1_id));
@@ -78,23 +78,23 @@ TEST_CASE("game/win_conditions")
 
     SECTION("check columns")
     {
-        const auto board1 = Board::with_data({
-            std::array{'X', 'X', 'O'},
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'X', 'O'},
-        });
+        const auto board1 = Board{
+            "XXO",
+            "XOX",
+            "XXO",
+        };
 
-        const auto board2 = Board::with_data({
-            std::array{'X', 'X', 'O'},
-            std::array{'O', 'X', 'X'},
-            std::array{'X', 'X', 'O'},
-        });
+        const auto board2 = Board{
+            "XXO",
+            "OXX",
+            "XXO",
+        };
 
-        const auto board3 = Board::with_data({
-            std::array{'O', 'X', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'X'},
-        });
+        const auto board3 = Board{
+            "OXX",
+            "XOX",
+            "OXX",
+        };
 
         CHECK(check_player_victory(board1, player1_id));
         CHECK(check_player_victory(board2, player1_id));
@@ -106,17 +106,17 @@ TEST_CASE("game/win_conditions")
 
     SECTION("check diagonals")
     {
-        const auto board1 = Board::with_data({
-            std::array{'X', 'O', 'O'},
-            std::array{'O', 'X', 'O'},
-            std::array{'O', 'O', 'X'},
-        });
+        const auto board1 = Board{
+            "XOO",
+            "OXO",
+            "OOX",
+        };
 
-        const auto board2 = Board::with_data({
-            std::array{'O', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-            std::array{'X', 'O', 'O'},
-        });
+        const auto board2 = Board{
+            "OOX",
+            "OXO",
+            "XOO",
+        };
 
         CHECK(check_player_victory(board1, player1_id));
         CHECK(check_player_victory(board2, player1_id));

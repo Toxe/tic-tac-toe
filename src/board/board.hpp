@@ -1,6 +1,7 @@
 #pragma once
 
-#include <array>
+#include <initializer_list>
+#include <string_view>
 
 #include "../game/player.hpp"
 #include "../grid/grid.hpp"
@@ -10,9 +11,8 @@ namespace tic_tac_toe {
 
 class Board {
 public:
-    Board() : squares_{3, 3, no_player_id} { }
-
-    static Board with_data(const std::array<std::array<char, 3>, 3>& data);
+    Board();
+    explicit Board(const std::initializer_list<std::string_view>& data);
 
     [[nodiscard]] int cols() const { return squares_.width(); }
     [[nodiscard]] int rows() const { return squares_.height(); }

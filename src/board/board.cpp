@@ -5,16 +5,25 @@
 
 namespace tic_tac_toe {
 
-Board Board::with_data(const std::array<std::array<char, 3>, 3>& data)
+Board::Board() : squares_{3, 3, no_player_id}
 {
-    Board board;
+}
 
-    for (int row = 0; row < board.rows(); ++row)
-        for (int col = 0; col < board.cols(); ++col)
-            if (const auto c = data[static_cast<std::size_t>(row)][static_cast<std::size_t>(col)]; c != '-')
-                board.change_owner_of_square(Square{col, row}, c == 'X' ? player1_id : player2_id);
+Board::Board(const std::initializer_list<std::string_view>& data) : squares_{3, 3, no_player_id}
+{
+    int row = 0;
 
-    return board;
+    assert(data.size() == static_cast<std::size_t>(rows()));
+
+    for (const auto& line : data) {
+        assert(line.size() == static_cast<std::size_t>(cols()));
+
+        for (int col = 0; col < cols(); ++col)
+            if (const auto c = line[static_cast<std::size_t>(col)]; c != '-')
+                change_owner_of_square(Square{col, row}, c == 'X' ? player1_id : player2_id);
+
+        ++row;
+    }
 }
 
 player_id Board::player_of_square(Square square) const

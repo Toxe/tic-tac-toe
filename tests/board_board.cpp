@@ -17,11 +17,11 @@ TEST_CASE("game/board")
 
     SECTION("can create Board with data")
     {
-        const auto board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', '-', '-'},
-        });
+        const auto board = Board{
+            "XOX",
+            "XOX",
+            "O--",
+        };
 
         CHECK(board.player_of_square({0, 0}) == player1_id);
         CHECK(board.player_of_square({1, 0}) == player2_id);
@@ -61,11 +61,11 @@ TEST_CASE("game/board")
 
     SECTION("can clear owners of squares")
     {
-        auto board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        auto board = Board{
+            "XOX",
+            "XOX",
+            "OXO",
+        };
 
         for (int row = 0; row < board.rows(); ++row) {
             for (int col = 0; col < board.cols(); ++col) {
@@ -94,22 +94,22 @@ TEST_CASE("game/board")
 
     SECTION("a full Board does not have empty squares")
     {
-        const auto board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'X'},
-            std::array{'O', 'X', 'O'},
-        });
+        const auto board = Board{
+            "XOX",
+            "XOX",
+            "OXO",
+        };
 
         CHECK(board.has_empty_squares() == false);
     }
 
     SECTION("all_squares_in_col_belong_to()")
     {
-        const auto board = Board::with_data({
-            std::array{'X', 'O', 'X'},
-            std::array{'X', 'O', 'O'},
-            std::array{'X', 'O', '-'},
-        });
+        const auto board = Board{
+            "XOX",
+            "XOO",
+            "XO-",
+        };
 
         CHECK(board.all_squares_in_col_belong_to(0, player1_id));
         CHECK(board.all_squares_in_col_belong_to(1, player2_id));
@@ -124,11 +124,11 @@ TEST_CASE("game/board")
 
     SECTION("all_squares_in_row_belong_to()")
     {
-        const auto board = Board::with_data({
-            std::array{'X', 'X', 'X'},
-            std::array{'O', 'O', 'O'},
-            std::array{'X', 'O', '-'},
-        });
+        const auto board = Board{
+            "XXX",
+            "OOO",
+            "XO-",
+        };
 
         CHECK(board.all_squares_in_row_belong_to(0, player1_id));
         CHECK(board.all_squares_in_row_belong_to(1, player2_id));
