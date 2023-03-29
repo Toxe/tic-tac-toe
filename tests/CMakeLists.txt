@@ -14,6 +14,8 @@ if(BUILD_TESTING)
         grid_grid.cpp
         grid_gridcell.cpp
         input_eval_input.cpp
+        minimax_minimax.cpp
+        minimax_stats.cpp
         output_show_board.cpp
         output_show_game_over.cpp
     )

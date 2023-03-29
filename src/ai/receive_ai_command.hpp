@@ -7,7 +7,8 @@ namespace tic_tac_toe {
 
 class Board;
 class CommandFactory;
+class ConsoleWriter;
 
-Command receive_ai_command(player_id player, const Board& board, CommandFactory& command_factory);
+Command receive_ai_command(player_id player, const Board& board, CommandFactory& command_factory, ConsoleWriter& console_writer);
 
 }  // namespace tic_tac_toe

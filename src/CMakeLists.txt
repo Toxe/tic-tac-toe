@@ -27,6 +27,10 @@ add_library(lib_tic_tac_toe
     input/eval_input.hpp
     input/receive_player_command.cpp
     input/receive_player_command.hpp
+    minimax/minimax.cpp
+    minimax/minimax.hpp
+    minimax/stats.cpp
+    minimax/stats.hpp
     output/console_writer.cpp
     output/console_writer.hpp
     output/show_board.cpp

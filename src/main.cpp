@@ -27,7 +27,7 @@ int main()
         if (player_is_human(player))
             console_writer.write(show_board(board));
 
-        auto command = (player_is_human(player)) ? receive_player_command(player.id, board, console_writer, command_factory) : receive_ai_command(player.id, board, command_factory);
+        auto command = (player_is_human(player)) ? receive_player_command(player.id, board, console_writer, command_factory) : receive_ai_command(player.id, board, command_factory, console_writer);
         controller.execute(std::move(command));
     }
 
