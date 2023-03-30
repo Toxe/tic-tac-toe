@@ -7,12 +7,16 @@ namespace tic_tac_toe {
 class Board;
 class MinimaxStats;
 
-struct AIMove {
-    int score;
-    Square square;
-    bool is_maximizing;
+enum class MinimaxStrategy {
+    maximizing,
+    minimizing
 };
 
-AIMove minimax(int depth, int max_depth, const Board& board, Square square, bool is_maximizing, MinimaxStats& stats);
+struct MinimaxMove {
+    Square square;
+    int score;
+};
+
+MinimaxMove minimax(Board& board, Square square, int depth, int max_depth, MinimaxStrategy strategy, MinimaxStats& stats);
 
 }  // namespace tic_tac_toe

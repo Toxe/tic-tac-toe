@@ -21,7 +21,7 @@ int main()
     ConsoleWriter console_writer;
     CommandFactory command_factory{board, game_state, controller, console_writer};
 
-    while (!game_over(board)) {
+    while (!game_over(get_win_condition(board))) {
         const PlayerInfo player = game_state.current_player();
 
         if (player_is_human(player))

@@ -10,7 +10,7 @@ TEST_CASE("minimax/stats")
     SECTION("update and print")
     {
         MinimaxStats stats;
-        AIMove move{3, Square{1, 2}, false};
+        const MinimaxMove move{Square{1, 2}, 3};
 
         CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: \d+, calls: \d+, move: \d\/\d \(score -?\d+\)\s)"));
         CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: 0, calls: 0, move: 1\/2 \(score 3\)\s)"));

@@ -16,7 +16,8 @@ Command receive_ai_command(const player_id player, const Board& board, CommandFa
         throw std::runtime_error("board is full");
 
     MinimaxStats stats;
-    auto move = minimax(0, 10, board, {0, 0}, player == player1_id, stats);
+    Board test_board = board;
+    const auto move = minimax(test_board, {0, 0}, 0, 10, player == player1_id ? MinimaxStrategy::maximizing : MinimaxStrategy::minimizing, stats);
 
     console_writer.write(stats.print(move));
 

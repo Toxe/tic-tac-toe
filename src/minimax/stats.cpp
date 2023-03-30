@@ -22,7 +22,7 @@ void MinimaxStats::update(const int depth)
     max_depth_ = std::max(max_depth_, depth);
 }
 
-std::string MinimaxStats::print(const AIMove& move) const
+std::string MinimaxStats::print(const MinimaxMove& move) const
 {
     return fmt::format("Minimax: {}, max depth: {}, calls: {}, move: {}/{} (score {})\n", format_duration(std::chrono::steady_clock::now() - begin_), max_depth_, calls_, move.square.x, move.square.y, move.score);
 }

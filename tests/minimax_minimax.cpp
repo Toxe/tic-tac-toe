@@ -31,7 +31,7 @@ WinCondition check_match(Board& board, const player_id first_player)
     if (game_state.current_player().id != first_player)
         game_state.switch_players();
 
-    while (!game_over(board)) {
+    while (!game_over(get_win_condition(board))) {
         console_writer.write(show_board(board));
         controller.execute(receive_ai_command(game_state.current_player().id, board, command_factory, console_writer));
     }
@@ -131,7 +131,7 @@ TEST_CASE("minimax/minimax")
         // clang-format on
 
         MinimaxStats stats;
-        const auto move = minimax(0, 10, board, {0, 0}, true, stats);
+        const auto move = minimax(board, {0, 0}, 0, 10, MinimaxStrategy::maximizing, stats);
 
         CHECK(move.score >= 1);
         CHECK(move.square == move_square);

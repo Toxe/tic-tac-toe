@@ -8,7 +8,7 @@ TEST_CASE("game/win_conditions")
 {
     SECTION("a new board is not game over")
     {
-        CHECK(game_over(Board{}) == false);
+        CHECK(game_over(get_win_condition(Board{})) == false);
     }
 
     SECTION("a draw is a full board without a winning player")
@@ -42,10 +42,10 @@ TEST_CASE("game/win_conditions")
             "OXX",
         };
 
-        CHECK(game_over(Board{}) == false);
-        CHECK(game_over(draw_board));
-        CHECK(game_over(player1_won_board));
-        CHECK(game_over(player2_won_board));
+        CHECK(game_over(get_win_condition(Board{})) == false);
+        CHECK(game_over(get_win_condition(draw_board)));
+        CHECK(game_over(get_win_condition(player1_won_board)));
+        CHECK(game_over(get_win_condition(player2_won_board)));
     }
 
     SECTION("check rows")

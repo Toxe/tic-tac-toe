@@ -2,11 +2,6 @@
 
 namespace tic_tac_toe {
 
-bool game_over(const Board& board)
-{
-    return get_win_condition(board) != WinCondition::none;
-}
-
 WinCondition get_win_condition(const Board& board)
 {
     if (check_player_victory(board, player1_id))
@@ -19,6 +14,11 @@ WinCondition get_win_condition(const Board& board)
         return WinCondition::draw;
 
     return WinCondition::none;
+}
+
+bool game_over(const WinCondition win_condition)
+{
+    return win_condition != WinCondition::none;
 }
 
 bool has_winning_row(const Board& board, const player_id player)
