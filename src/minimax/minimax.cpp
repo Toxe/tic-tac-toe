@@ -1,7 +1,7 @@
 #include "minimax.hpp"
 
+#include <algorithm>
 #include <cassert>
-#include <limits>
 #include <stdexcept>
 
 #include "../board/board.hpp"
@@ -10,8 +10,14 @@
 
 namespace tic_tac_toe {
 
-bool cmp_move_gt(const MinimaxMove& move, const MinimaxMove& best_move) { return move.score > best_move.score; }
-bool cmp_move_lt(const MinimaxMove& move, const MinimaxMove& best_move) { return move.score < best_move.score; }
+struct WithOwnerOfSquare {
+    WithOwnerOfSquare(Board& board, Square& square, const player_id player) : board_{board}, square_{square} { board_.change_owner_of_square(square_, player); }
+    ~WithOwnerOfSquare() { board_.clear_owner_of_square(square_); }
+
+private:
+    Board& board_;
+    Square& square_;
+};
 
 int calc_score(const int depth, const int max_depth, const WinCondition win_condition)
 {
@@ -26,7 +32,7 @@ int calc_score(const int depth, const int max_depth, const WinCondition win_cond
     return win_condition == WinCondition::player1_won ? score : -score;
 }
 
-MinimaxMove minimax(Board& board, const Square square, const int depth, const int max_depth, const MinimaxStrategy strategy, MinimaxStats& stats)
+MinimaxMove minimax(Board& board, const Square square, const int depth, const int max_depth, const MinimaxStrategy strategy, MinimaxStats& stats, int alpha, int beta)
 {
     stats.update(depth);
 
@@ -38,26 +44,44 @@ MinimaxMove minimax(Board& board, const Square square, const int depth, const in
     if (depth == max_depth)
         return {square, 0};
 
-    const auto check_player = strategy == MinimaxStrategy::maximizing ? player1_id : player2_id;
-    const auto check_strategy = strategy == MinimaxStrategy::maximizing ? MinimaxStrategy::minimizing : MinimaxStrategy::maximizing;
-    const auto is_better = strategy == MinimaxStrategy::maximizing ? cmp_move_gt : cmp_move_lt;
-
     MinimaxMove best_move{square, strategy == MinimaxStrategy::maximizing ? std::numeric_limits<int>::min() : std::numeric_limits<int>::max()};
+    Square check_square{0, 0};
+    bool done = false;
 
-    for (int row = 0; row < board.rows(); ++row) {
-        for (int col = 0; col < board.cols(); ++col) {
-            const Square check_square{col, row};
+    while (check_square.y < board.rows() && !done) {
+        check_square.x = 0;
 
+        while (check_square.x < board.cols() && !done) {
             if (board.empty_square(check_square)) {
-                board.change_owner_of_square(check_square, check_player);
-                const auto move = minimax(board, check_square, depth + 1, max_depth, check_strategy, stats);
+                if (strategy == MinimaxStrategy::maximizing) {
+                    const WithOwnerOfSquare with_owner_of_square{board, check_square, player1_id};
+                    const auto move = minimax(board, check_square, depth + 1, max_depth, MinimaxStrategy::minimizing, stats, alpha, beta);
 
-                if (is_better(move, best_move))
-                    best_move = MinimaxMove{check_square, move.score};
+                    if (move.score > best_move.score) {
+                        best_move = MinimaxMove{check_square, move.score};
+                        alpha = std::max(alpha, best_move.score);
 
-                board.clear_owner_of_square(check_square);
+                        if (best_move.score >= beta)
+                            done = true;
+                    }
+                } else {
+                    const WithOwnerOfSquare with_owner_of_square{board, check_square, player2_id};
+                    const auto move = minimax(board, check_square, depth + 1, max_depth, MinimaxStrategy::maximizing, stats, alpha, beta);
+
+                    if (move.score < best_move.score) {
+                        best_move = MinimaxMove{check_square, move.score};
+                        beta = std::min(beta, best_move.score);
+
+                        if (best_move.score <= alpha)
+                            done = true;
+                    }
+                }
             }
+
+            ++check_square.x;
         }
+
+        ++check_square.y;
     }
 
     return best_move;
