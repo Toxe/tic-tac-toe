@@ -14,7 +14,7 @@ std::string read_input(const player_id player, ConsoleWriter& console_writer)
     std::string input;
 
     while (true) {
-        if (scn::prompt(fmt::format("Player {}, your move? (type \"?\" for help)\n> ", player_symbol(player)).c_str(), "{}", input))
+        if (scn::prompt(fmt::format("Player {}, your move? (type \"?\" for help)\n? ", player_symbol(player)).c_str(), "{}", input))
             break;
 
         console_writer.write("invalid input\n");
