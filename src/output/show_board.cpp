@@ -12,6 +12,11 @@ char player_symbol(const player_id player)
     return player == player1_id ? 'X' : 'O';
 }
 
+void generate_empty_line(std::stringstream& out)
+{
+    out << '\n';
+}
+
 void generate_horizontal_line(std::stringstream& out)
 {
     out << "+---+---+---+\n";
@@ -55,6 +60,8 @@ std::string show_board(const Board& board)
 {
     std::stringstream out;
 
+    generate_empty_line(out);
+
     for (int row = 0; row < board.rows(); ++row) {
         generate_horizontal_line(out);
         generate_row(out, board, row);
@@ -62,6 +69,7 @@ std::string show_board(const Board& board)
 
     generate_horizontal_line(out);
     generate_column_numbers(out);
+    generate_empty_line(out);
 
     return out.str();
 }

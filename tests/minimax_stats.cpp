@@ -10,10 +10,8 @@ TEST_CASE("minimax/stats")
     SECTION("update and print")
     {
         MinimaxStats stats;
-        const MinimaxMove move{Square{1, 2}, 3};
 
-        CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: \d+, calls: \d+, move: \d\/\d \(score -?\d+\)\s)"));
-        CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: 0, calls: 0, move: 1\/2 \(score 3\)\s)"));
+        CHECK_THAT(stats.print(), Catch::Matchers::Matches(R"(> calculated 0 moves in \d+\.\d+ .s \(depth: 0\)\s)"));
 
         stats.update(1);
         stats.update(1);
@@ -21,8 +19,7 @@ TEST_CASE("minimax/stats")
         stats.update(2);
         stats.update(3);
 
-        CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: \d+, calls: \d+, move: \d\/\d \(score -?\d+\)\s)"));
-        CHECK_THAT(stats.print(move), Catch::Matchers::Matches(R"(Minimax: \d+\.\d+ .s, max depth: 3, calls: 5, move: 1\/2 \(score 3\)\s)"));
+        CHECK_THAT(stats.print(), Catch::Matchers::Matches(R"(> calculated 5 moves in \d+\.\d+ .s \(depth: 3\)\s)"));
     }
 }
 

@@ -19,7 +19,7 @@ Command receive_ai_command(const player_id player, const Board& board, CommandFa
     Board test_board = board;
     const auto move = minimax(test_board, {0, 0}, 0, 10, player == player1_id ? MinimaxStrategy::maximizing : MinimaxStrategy::minimizing, stats);
 
-    console_writer.write(stats.print(move));
+    console_writer.write(stats.print());
 
     return command_factory.create_player_move_command(player, move.square);
 }

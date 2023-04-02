@@ -18,13 +18,13 @@ std::string format_duration(std::chrono::nanoseconds dur)
 
 void MinimaxStats::update(const int depth)
 {
-    ++calls_;
+    ++calculations_;
     max_depth_ = std::max(max_depth_, depth);
 }
 
-std::string MinimaxStats::print(const MinimaxMove& move) const
+std::string MinimaxStats::print() const
 {
-    return fmt::format("Minimax: {}, max depth: {}, calls: {}, move: {}/{} (score {})\n", format_duration(std::chrono::steady_clock::now() - begin_), max_depth_, calls_, move.square.x, move.square.y, move.score);
+    return fmt::format("> calculated {} moves in {} (depth: {})\n", calculations_, format_duration(std::chrono::steady_clock::now() - begin_), max_depth_);
 }
 
 }  // namespace tic_tac_toe

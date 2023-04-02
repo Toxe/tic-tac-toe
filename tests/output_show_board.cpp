@@ -9,14 +9,16 @@ TEST_CASE("output/show_board")
 {
     SECTION("empty board")
     {
-        const std::string s = "+---+---+---+\n"
+        const std::string s = "\n"
+                              "+---+---+---+\n"
                               "|   |   |   | 1\n"
                               "+---+---+---+\n"
                               "|   |   |   | 2\n"
                               "+---+---+---+\n"
                               "|   |   |   | 3\n"
                               "+---+---+---+\n"
-                              "  A   B   C\n";
+                              "  A   B   C\n"
+                              "\n";
 
         const Board board;
 
@@ -25,14 +27,16 @@ TEST_CASE("output/show_board")
 
     SECTION("board with occupied squares")
     {
-        const std::string s = "+---+---+---+\n"
+        const std::string s = "\n"
+                              "+---+---+---+\n"
                               "| X | O |   | 1\n"
                               "+---+---+---+\n"
                               "|   |   | X | 2\n"
                               "+---+---+---+\n"
                               "| O |   |   | 3\n"
                               "+---+---+---+\n"
-                              "  A   B   C\n";
+                              "  A   B   C\n"
+                              "\n";
 
         Board board;
 
