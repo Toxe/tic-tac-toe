@@ -2,6 +2,7 @@
 
 #include "../src/app/app_controller.hpp"
 #include "../src/app/commands.hpp"
+#include "../src/game/game_state.hpp"
 
 namespace tic_tac_toe {
 
@@ -14,26 +15,64 @@ TEST_CASE("app/commands")
         .execute = [&] { ++value; },
         .undo = [&] { --value; }};
 
-    SECTION("UndoCommand")
+    SECTION("human vs. human")
     {
-        controller.execute(command);
-        controller.execute(command);
-        CHECK(value == 2);
+        const GameState game_state{PlayerType::human, PlayerType::human};
 
-        controller.execute(UndoCommand(&controller));
-        CHECK(value == 0);
+        SECTION("UndoCommand")
+        {
+            controller.execute(command);
+            controller.execute(command);
+            CHECK(value == 2);
+
+            controller.execute(UndoCommand(&controller, &game_state));
+            CHECK(value == 1);
+
+            controller.execute(UndoCommand(&controller, &game_state));
+            CHECK(value == 0);
+        }
+
+        SECTION("RedoCommand")
+        {
+            controller.execute(command);
+            controller.execute(command);
+            controller.undo();
+            controller.undo();
+            CHECK(value == 0);
+
+            controller.execute(RedoCommand(&controller, &game_state));
+            CHECK(value == 1);
+
+            controller.execute(RedoCommand(&controller, &game_state));
+            CHECK(value == 2);
+        }
     }
 
-    SECTION("RedoCommand")
+    SECTION("human vs. AI")
     {
-        controller.execute(command);
-        controller.execute(command);
-        controller.undo();
-        controller.undo();
-        CHECK(value == 0);
+        const GameState game_state{PlayerType::human, PlayerType::ai};
 
-        controller.execute(RedoCommand(&controller));
-        CHECK(value == 2);
+        SECTION("UndoCommand")
+        {
+            controller.execute(command);
+            controller.execute(command);
+            CHECK(value == 2);
+
+            controller.execute(UndoCommand(&controller, &game_state));
+            CHECK(value == 0);
+        }
+
+        SECTION("RedoCommand")
+        {
+            controller.execute(command);
+            controller.execute(command);
+            controller.undo();
+            controller.undo();
+            CHECK(value == 0);
+
+            controller.execute(RedoCommand(&controller, &game_state));
+            CHECK(value == 2);
+        }
     }
 }
 

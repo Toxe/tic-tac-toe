@@ -22,12 +22,12 @@ Command CommandFactory::create_quit_command()
 
 Command CommandFactory::create_undo_command()
 {
-    return UndoCommand(controller_);
+    return UndoCommand(controller_, game_state_);
 }
 
 Command CommandFactory::create_redo_command()
 {
-    return RedoCommand(controller_);
+    return RedoCommand(controller_, game_state_);
 }
 
 }  // namespace tic_tac_toe

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "../app/app_controller.hpp"
+#include "../game/game_state.hpp"
 #include "../output/console_writer.hpp"
 
 namespace tic_tac_toe {
@@ -33,21 +34,25 @@ Command QuitCommand()
         }};
 }
 
-Command UndoCommand(AppController* controller)
+Command UndoCommand(AppController* controller, const GameState* game_state)
 {
     return Command{
         [=]() {
-            controller->undo();  // undo AI turn
+            if (game_state->playing_against_ai())
+                controller->undo();  // undo AI turn
+
             controller->undo();  // undo player turn
         }};
 }
 
-Command RedoCommand(AppController* controller)
+Command RedoCommand(AppController* controller, const GameState* game_state)
 {
     return Command{
         [=]() {
             controller->redo();  // redo player turn
-            controller->redo();  // redo AI turn
+
+            if (game_state->playing_against_ai())
+                controller->redo();  // redo AI turn
         }};
 }
 

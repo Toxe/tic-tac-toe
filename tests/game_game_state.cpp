@@ -26,6 +26,14 @@ TEST_CASE("game/game_state")
         game_state.switch_players();
         CHECK(game_state.current_player().id == player2_id);
     }
+
+    SECTION("check if a human player is playing against AI")
+    {
+        CHECK(GameState{PlayerType::human, PlayerType::ai}.playing_against_ai() == true);
+        CHECK(GameState{PlayerType::ai, PlayerType::human}.playing_against_ai() == true);
+        CHECK(GameState{PlayerType::human, PlayerType::human}.playing_against_ai() == false);
+        CHECK(GameState{PlayerType::ai, PlayerType::ai}.playing_against_ai() == false);
+    }
 }
 
 }  // namespace tic_tac_toe

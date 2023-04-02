@@ -1,5 +1,6 @@
 #include "game_state.hpp"
 
+#include <algorithm>
 #include <cassert>
 
 namespace tic_tac_toe {
@@ -15,6 +16,11 @@ const PlayerInfo& GameState::current_player() const
     assert(player_id_is_valid(current_player_id_));
 
     return players_[static_cast<std::size_t>(current_player_id_ - 1)];
+}
+
+bool GameState::playing_against_ai() const
+{
+    return std::count_if(players_.begin(), players_.end(), [](const auto& player_info) { return player_info.type == PlayerType::human; }) == 1;
 }
 
 void GameState::switch_players()

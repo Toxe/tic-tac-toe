@@ -11,6 +11,7 @@ public:
     GameState(PlayerType player1_type, PlayerType player2_type);
 
     [[nodiscard]] const PlayerInfo& current_player() const;
+    [[nodiscard]] bool playing_against_ai() const;
 
     void switch_players();
 
