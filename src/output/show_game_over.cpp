@@ -4,6 +4,8 @@
 
 #include "fmt/core.h"
 
+#include "player_symbol.hpp"
+
 namespace tic_tac_toe {
 
 std::string generate_ongoing_game()
@@ -18,7 +20,7 @@ std::string generate_draw()
 
 std::string generate_player_victory(const player_id player)
 {
-    return fmt::format("Player {} won!", player);
+    return fmt::format("Player {} won!", player_symbol(player));
 }
 
 std::string show_game_over(const WinCondition win_condition)

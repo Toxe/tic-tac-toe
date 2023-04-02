@@ -3,14 +3,9 @@
 #include <cassert>
 #include <sstream>
 
+#include "player_symbol.hpp"
+
 namespace tic_tac_toe {
-
-char player_symbol(const player_id player)
-{
-    assert(player_id_is_valid(player));
-
-    return player == player1_id ? 'X' : 'O';
-}
 
 void generate_empty_line(std::stringstream& out)
 {

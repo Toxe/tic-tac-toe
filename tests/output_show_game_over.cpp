@@ -19,12 +19,12 @@ TEST_CASE("output/show_game_over")
 
     SECTION("player 1 won")
     {
-        CHECK_THAT(show_game_over(WinCondition::player1_won), Catch::Matchers::Equals("Player 1 won!"));
+        CHECK_THAT(show_game_over(WinCondition::player1_won), Catch::Matchers::Equals("Player X won!"));
     }
 
     SECTION("player 2 won")
     {
-        CHECK_THAT(show_game_over(WinCondition::player2_won), Catch::Matchers::Equals("Player 2 won!"));
+        CHECK_THAT(show_game_over(WinCondition::player2_won), Catch::Matchers::Equals("Player O won!"));
     }
 }
 

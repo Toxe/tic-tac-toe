@@ -8,6 +8,7 @@
 #include "../board/board.hpp"
 #include "../game/game_state.hpp"
 #include "../output/console_writer.hpp"
+#include "../output/player_symbol.hpp"
 
 namespace tic_tac_toe {
 
@@ -17,7 +18,7 @@ Command PlayerMoveCommand(GameState* game_state, Board* board, ConsoleWriter* co
 
     return Command{
         .execute = [=]() {
-            console_writer->write(fmt::format("> player {} move: {}/{}\n", player, square.col(), square.row()));
+            console_writer->write(fmt::format("> player {} move: {}/{}\n", player_symbol(player), square.col(), square.row()));
 
             if (!board->empty_square(square))
                  throw std::invalid_argument("square already occupied");
@@ -25,7 +26,7 @@ Command PlayerMoveCommand(GameState* game_state, Board* board, ConsoleWriter* co
             board->change_owner_of_square(square, player);
             game_state->switch_players(); },
         .undo = [=]() {
-            console_writer->write(fmt::format("> undo player {} move: {}/{}\n", player, square.col(), square.row()));
+            console_writer->write(fmt::format("> undo player {} move: {}/{}\n", player_symbol(player), square.col(), square.row()));
 
             if (board->player_of_square(square) != player)
                  throw std::invalid_argument("wrong owner of square");

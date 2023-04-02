@@ -33,6 +33,8 @@ add_library(lib_tic_tac_toe
     minimax/stats.hpp
     output/console_writer.cpp
     output/console_writer.hpp
+    output/player_symbol.cpp
+    output/player_symbol.hpp
     output/show_board.cpp
     output/show_board.hpp
     output/show_game_over.cpp
