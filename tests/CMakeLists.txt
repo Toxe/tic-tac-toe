@@ -17,6 +17,7 @@ if(BUILD_TESTING)
         minimax_minimax.cpp
         minimax_stats.cpp
         output_player_symbol.cpp
+        output_print_square.cpp
         output_show_board.cpp
         output_show_game_over.cpp
     )

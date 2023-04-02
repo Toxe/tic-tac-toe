@@ -35,6 +35,8 @@ add_library(lib_tic_tac_toe
     output/console_writer.hpp
     output/player_symbol.cpp
     output/player_symbol.hpp
+    output/print_square.cpp
+    output/print_square.hpp
     output/show_board.cpp
     output/show_board.hpp
     output/show_game_over.cpp
