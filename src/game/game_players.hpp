@@ -8,9 +8,11 @@ namespace tic_tac_toe {
 
 class GamePlayers {
 public:
-    GamePlayers(PlayerType player1_type, PlayerType player2_type);
+    GamePlayers(PlayerType player1_type, PlayerType player2_type) : players_{PlayerInfo{Player::X, player1_type}, PlayerInfo{Player::O, player2_type}} { }
 
-    [[nodiscard]] const PlayerInfo& current_player() const;
+    [[nodiscard]] Player current_player() const { return current_player_; }
+    [[nodiscard]] const PlayerInfo& player_info(Player player) const;
+
     [[nodiscard]] bool playing_against_ai() const;
 
     void switch_players();

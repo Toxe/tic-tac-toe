@@ -28,12 +28,12 @@ WinCondition check_match(Board& board, const Player first_player)
     ConsoleWriter console_writer;
     CommandFactory command_factory{board, game_players, controller, console_writer};
 
-    if (game_players.current_player().player != first_player)
+    if (game_players.current_player() != first_player)
         game_players.switch_players();
 
     while (!game_over(get_win_condition(board))) {
         console_writer.write(show_board(board));
-        controller.execute(receive_ai_command(game_players.current_player().player, board, command_factory, console_writer));
+        controller.execute(receive_ai_command(game_players.current_player(), board, command_factory, console_writer));
     }
 
     console_writer.write(show_board(board));

@@ -22,11 +22,12 @@ int main()
     CommandFactory command_factory{board, game_players, controller, console_writer};
 
     while (!game_over(get_win_condition(board))) {
-        const PlayerInfo current_player_info = game_players.current_player();
+        const Player player = game_players.current_player();
+        const bool is_human_player = player_is_human(game_players.player_info(player));
 
         console_writer.write(show_board(board));
 
-        auto command = (player_is_human(current_player_info)) ? receive_player_command(current_player_info.player, board, console_writer, command_factory) : receive_ai_command(current_player_info.player, board, command_factory, console_writer);
+        auto command = is_human_player ? receive_player_command(player, board, console_writer, command_factory) : receive_ai_command(player, board, command_factory, console_writer);
         controller.execute(std::move(command));
     }
 
