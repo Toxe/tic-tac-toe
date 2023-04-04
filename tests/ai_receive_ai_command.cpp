@@ -7,14 +7,14 @@
 #include "../src/app/app_controller.hpp"
 #include "../src/board/board.hpp"
 #include "../src/command/command_factory.hpp"
-#include "../src/game/game_state.hpp"
+#include "../src/game/game_players.hpp"
 #include "../src/output/console_writer.hpp"
 
 namespace tic_tac_toe {
 
 TEST_CASE("ai/receive_ai_command")
 {
-    GameState game_state{PlayerType::human, PlayerType::ai};
+    GamePlayers game_players{PlayerType::human, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer{false};
 
@@ -26,7 +26,7 @@ TEST_CASE("ai/receive_ai_command")
             "X-X",
             "OXO",
         };
-        CommandFactory command_factory{board, game_state, controller, console_writer};
+        CommandFactory command_factory{board, game_players, controller, console_writer};
 
         auto command = receive_ai_command(Player::O, board, command_factory, console_writer);
         controller.execute(std::move(command));
@@ -43,7 +43,7 @@ TEST_CASE("ai/receive_ai_command")
                 "X-X",
                 "OXO",
             };
-            CommandFactory command_factory{board, game_state, controller, console_writer};
+            CommandFactory command_factory{board, game_players, controller, console_writer};
 
             auto command = receive_ai_command(player, board, command_factory, console_writer);
             controller.execute(std::move(command));
@@ -60,7 +60,7 @@ TEST_CASE("ai/receive_ai_command")
             "XXX",
             "XXX",
         };
-        CommandFactory command_factory{board, game_state, controller, console_writer};
+        CommandFactory command_factory{board, game_players, controller, console_writer};
 
         CHECK_THROWS(receive_ai_command(Player::O, board, command_factory, console_writer));
     }

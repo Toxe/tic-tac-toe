@@ -4,7 +4,7 @@
 #include "app/app_controller.hpp"
 #include "board/board.hpp"
 #include "command/command_factory.hpp"
-#include "game/game_state.hpp"
+#include "game/game_players.hpp"
 #include "game/win_conditions.hpp"
 #include "input/receive_player_command.hpp"
 #include "output/console_writer.hpp"
@@ -16,13 +16,13 @@ using namespace tic_tac_toe;
 int main()
 {
     Board board;
-    GameState game_state{PlayerType::human, PlayerType::ai};
+    GamePlayers game_players{PlayerType::human, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
-    CommandFactory command_factory{board, game_state, controller, console_writer};
+    CommandFactory command_factory{board, game_players, controller, console_writer};
 
     while (!game_over(get_win_condition(board))) {
-        const PlayerInfo current_player_info = game_state.current_player();
+        const PlayerInfo current_player_info = game_players.current_player();
 
         console_writer.write(show_board(board));
 

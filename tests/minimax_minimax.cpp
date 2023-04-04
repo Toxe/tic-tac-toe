@@ -9,7 +9,7 @@
 #include "../src/app/app_controller.hpp"
 #include "../src/board/board.hpp"
 #include "../src/command/command_factory.hpp"
-#include "../src/game/game_state.hpp"
+#include "../src/game/game_players.hpp"
 #include "../src/game/win_conditions.hpp"
 #include "../src/minimax/minimax.hpp"
 #include "../src/minimax/stats.hpp"
@@ -23,17 +23,17 @@ std::ostream& operator<<(std::ostream& os, const Square& square) { return os << 
 
 WinCondition check_match(Board& board, const Player first_player)
 {
-    GameState game_state{PlayerType::ai, PlayerType::ai};
+    GamePlayers game_players{PlayerType::ai, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
-    CommandFactory command_factory{board, game_state, controller, console_writer};
+    CommandFactory command_factory{board, game_players, controller, console_writer};
 
-    if (game_state.current_player().player != first_player)
-        game_state.switch_players();
+    if (game_players.current_player().player != first_player)
+        game_players.switch_players();
 
     while (!game_over(get_win_condition(board))) {
         console_writer.write(show_board(board));
-        controller.execute(receive_ai_command(game_state.current_player().player, board, command_factory, console_writer));
+        controller.execute(receive_ai_command(game_players.current_player().player, board, command_factory, console_writer));
     }
 
     console_writer.write(show_board(board));

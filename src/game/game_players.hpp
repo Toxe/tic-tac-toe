@@ -6,9 +6,9 @@
 
 namespace tic_tac_toe {
 
-class GameState {
+class GamePlayers {
 public:
-    GameState(PlayerType player1_type, PlayerType player2_type);
+    GamePlayers(PlayerType player1_type, PlayerType player2_type);
 
     [[nodiscard]] const PlayerInfo& current_player() const;
     [[nodiscard]] bool playing_against_ai() const;

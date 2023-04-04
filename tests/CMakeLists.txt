@@ -7,7 +7,7 @@ if(BUILD_TESTING)
         board_square.cpp
         command_command.cpp
         game_commands.cpp
-        game_game_state.cpp
+        game_game_players.cpp
         game_player.cpp
         game_win_conditions.cpp
         grid_coords.cpp

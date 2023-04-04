@@ -14,8 +14,8 @@ add_library(lib_tic_tac_toe
     command/command_factory.hpp
     game/commands.cpp
     game/commands.hpp
-    game/game_state.cpp
-    game/game_state.hpp
+    game/game_players.cpp
+    game/game_players.hpp
     game/player.cpp
     game/player.hpp
     game/win_conditions.cpp

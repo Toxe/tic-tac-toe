@@ -6,7 +6,7 @@
 #include "../src/app/app_controller.hpp"
 #include "../src/board/board.hpp"
 #include "../src/command/command_factory.hpp"
-#include "../src/game/game_state.hpp"
+#include "../src/game/game_players.hpp"
 #include "../src/input/eval_input.hpp"
 #include "../src/output/console_writer.hpp"
 
@@ -17,10 +17,10 @@ TEST_CASE("input/eval_input")
     SECTION("eval_input()")
     {
         Board board;
-        GameState game_state{PlayerType::human, PlayerType::ai};
+        GamePlayers game_players{PlayerType::human, PlayerType::ai};
         AppController controller;
         ConsoleWriter console_writer{false};
-        CommandFactory command_factory{board, game_state, controller, console_writer};
+        CommandFactory command_factory{board, game_players, controller, console_writer};
 
         SECTION("empty input returns an invalid command (nullopt)")
         {
@@ -91,7 +91,7 @@ TEST_CASE("input/eval_input")
 
                 for (const auto& check : checks) {
                     Board empty_board;
-                    CommandFactory new_command_factory{empty_board, game_state, controller, console_writer};
+                    CommandFactory new_command_factory{empty_board, game_players, controller, console_writer};
 
                     auto command = eval_input(Player::X, empty_board, new_command_factory, check.first);
                     controller.execute(std::move(*command));
