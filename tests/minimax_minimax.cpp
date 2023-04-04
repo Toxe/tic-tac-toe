@@ -26,7 +26,7 @@ WinCondition check_match(Board& board, const Player first_player)
     GamePlayers game_players{PlayerType::ai, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
-    CommandFactory command_factory{board, game_players, controller, console_writer};
+    const CommandFactory command_factory{board, game_players, controller, console_writer};
 
     if (game_players.current_player() != first_player)
         game_players.switch_players();

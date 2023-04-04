@@ -9,6 +9,6 @@ class Board;
 class ConsoleWriter;
 class CommandFactory;
 
-Command receive_player_command(Player player, Board& board, ConsoleWriter& console_writer, CommandFactory& command_factory);
+Command receive_player_command(Player player, Board& board, ConsoleWriter& console_writer, const CommandFactory& command_factory);
 
 }  // namespace tic_tac_toe

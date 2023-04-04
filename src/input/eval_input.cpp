@@ -7,7 +7,7 @@
 
 namespace tic_tac_toe {
 
-std::optional<Command> check_keyword_commands(CommandFactory& command_factory, const std::string& input)
+std::optional<Command> check_keyword_commands(const CommandFactory& command_factory, const std::string& input)
 {
     if (input == "?" || input == "h" || input == "help")
         return command_factory.create_help_command();
@@ -21,7 +21,7 @@ std::optional<Command> check_keyword_commands(CommandFactory& command_factory, c
     return {};
 }
 
-std::optional<Command> eval_input(const Player player, Board& board, CommandFactory& command_factory, const std::string& input)
+std::optional<Command> eval_input(const Player player, Board& board, const CommandFactory& command_factory, const std::string& input)
 {
     // check for simple keyword commands
     if (auto command = check_keyword_commands(command_factory, input))

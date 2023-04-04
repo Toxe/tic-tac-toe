@@ -16,11 +16,11 @@ public:
     CommandFactory(Board& board, GamePlayers& game_players, AppController& controller, ConsoleWriter& console_writer)
         : board_{&board}, game_players_{&game_players}, controller_{&controller}, console_writer_{&console_writer} { }
 
-    Command create_player_move_command(Player player, Square square);
-    Command create_help_command();
-    Command create_quit_command();
-    Command create_undo_command();
-    Command create_redo_command();
+    Command create_player_move_command(Player player, Square square) const;
+    Command create_help_command() const;
+    Command create_quit_command() const;
+    Command create_undo_command() const;
+    Command create_redo_command() const;
 
 private:
     Board* board_;

@@ -19,7 +19,7 @@ int main()
     GamePlayers game_players{PlayerType::human, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
-    CommandFactory command_factory{board, game_players, controller, console_writer};
+    const CommandFactory command_factory{board, game_players, controller, console_writer};
 
     while (!game_over(get_win_condition(board))) {
         const Player player = game_players.current_player();

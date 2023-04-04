@@ -20,7 +20,7 @@ TEST_CASE("input/eval_input")
         GamePlayers game_players{PlayerType::human, PlayerType::ai};
         AppController controller;
         ConsoleWriter console_writer{false};
-        CommandFactory command_factory{board, game_players, controller, console_writer};
+        const CommandFactory command_factory{board, game_players, controller, console_writer};
 
         SECTION("empty input returns an invalid command (nullopt)")
         {

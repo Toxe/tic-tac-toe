@@ -10,7 +10,7 @@
 
 namespace tic_tac_toe {
 
-Command receive_ai_command(const Player player, const Board& board, CommandFactory& command_factory, ConsoleWriter& console_writer)
+Command receive_ai_command(const Player player, const Board& board, const CommandFactory& command_factory, ConsoleWriter& console_writer)
 {
     if (!board.has_empty_squares())
         throw std::runtime_error("board is full");
