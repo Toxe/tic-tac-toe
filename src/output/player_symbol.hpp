@@ -4,6 +4,6 @@
 
 namespace tic_tac_toe {
 
-char player_symbol(player_id player);
+char player_symbol(Player player);
 
 }  // namespace tic_tac_toe

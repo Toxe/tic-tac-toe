@@ -21,19 +21,19 @@ namespace tic_tac_toe {
 
 std::ostream& operator<<(std::ostream& os, const Square& square) { return os << fmt::format("({}/{})", square.x, square.y); }
 
-WinCondition check_match(Board& board, const player_id first_player)
+WinCondition check_match(Board& board, const Player first_player)
 {
     GameState game_state{PlayerType::ai, PlayerType::ai};
     AppController controller;
     ConsoleWriter console_writer;
     CommandFactory command_factory{board, game_state, controller, console_writer};
 
-    if (game_state.current_player().id != first_player)
+    if (game_state.current_player().player != first_player)
         game_state.switch_players();
 
     while (!game_over(get_win_condition(board))) {
         console_writer.write(show_board(board));
-        controller.execute(receive_ai_command(game_state.current_player().id, board, command_factory, console_writer));
+        controller.execute(receive_ai_command(game_state.current_player().player, board, command_factory, console_writer));
     }
 
     console_writer.write(show_board(board));
@@ -137,7 +137,7 @@ TEST_CASE("minimax/minimax")
         CHECK(move.square == move_square);
 
         if (move.score < 1 || move.square != move_square)
-            CHECK(check_match(board, player1_id) == WinCondition::player1_won);
+            CHECK(check_match(board, Player::X) == WinCondition::player1_won);
     }
 }
 

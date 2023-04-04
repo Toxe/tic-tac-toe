@@ -13,9 +13,9 @@
 
 namespace tic_tac_toe {
 
-Command PlayerMoveCommand(GameState* game_state, Board* board, ConsoleWriter* console_writer, const player_id player, const Square square)
+Command PlayerMoveCommand(GameState* game_state, Board* board, ConsoleWriter* console_writer, const Player player, const Square square)
 {
-    assert(player_id_is_valid(player));
+    assert(player_is_valid(player));
 
     return Command{
         .execute = [=]() {

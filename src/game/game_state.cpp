@@ -7,15 +7,15 @@ namespace tic_tac_toe {
 
 GameState::GameState(const PlayerType player1_type, const PlayerType player2_type)
 {
-    players_[0] = PlayerInfo{player1_id, player1_type};
-    players_[1] = PlayerInfo{player2_id, player2_type};
+    players_[0] = PlayerInfo{Player::X, player1_type};
+    players_[1] = PlayerInfo{Player::O, player2_type};
 }
 
 const PlayerInfo& GameState::current_player() const
 {
-    assert(player_id_is_valid(current_player_id_));
+    assert(player_is_valid(current_player_));
 
-    return players_[static_cast<std::size_t>(current_player_id_ - 1)];
+    return players_[static_cast<std::size_t>(current_player_) - 1];
 }
 
 bool GameState::playing_against_ai() const
@@ -25,9 +25,9 @@ bool GameState::playing_against_ai() const
 
 void GameState::switch_players()
 {
-    assert(player_id_is_valid(current_player_id_));
+    assert(player_is_valid(current_player_));
 
-    current_player_id_ = current_player_id_ == player1_id ? player2_id : player1_id;
+    current_player_ = current_player_ == Player::X ? Player ::O : Player::X;
 }
 
 }  // namespace tic_tac_toe

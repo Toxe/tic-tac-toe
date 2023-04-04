@@ -8,7 +8,7 @@ TEST_CASE("game/player")
 {
     SECTION("check if player is human")
     {
-        PlayerInfo player_info{player1_id, PlayerType::human};
+        const PlayerInfo player_info{Player::X, PlayerType::human};
 
         CHECK(player_is_human(player_info) == true);
         CHECK(player_is_ai(player_info) == false);
@@ -16,7 +16,7 @@ TEST_CASE("game/player")
 
     SECTION("check if player is AI")
     {
-        PlayerInfo player_info{player2_id, PlayerType::ai};
+        const PlayerInfo player_info{Player::O, PlayerType::ai};
 
         CHECK(player_is_human(player_info) == false);
         CHECK(player_is_ai(player_info) == true);
@@ -24,9 +24,9 @@ TEST_CASE("game/player")
 
     SECTION("check if player id is valid")
     {
-        CHECK(player_id_is_valid(player1_id) == true);
-        CHECK(player_id_is_valid(player2_id) == true);
-        CHECK(player_id_is_valid(no_player_id) == false);
+        CHECK(player_is_valid(Player::X) == true);
+        CHECK(player_is_valid(Player::O) == true);
+        CHECK(player_is_valid(Player::none) == false);
     }
 }
 

@@ -10,7 +10,7 @@ TEST_CASE("game/game_state")
     {
         const GameState game_state{PlayerType::human, PlayerType::ai};
 
-        CHECK(game_state.current_player().id == player1_id);
+        CHECK(game_state.current_player().player == Player::X);
     }
 
     SECTION("can switch between the players")
@@ -18,13 +18,13 @@ TEST_CASE("game/game_state")
         GameState game_state{PlayerType::human, PlayerType::ai};
 
         game_state.switch_players();
-        CHECK(game_state.current_player().id == player2_id);
+        CHECK(game_state.current_player().player == Player::O);
 
         game_state.switch_players();
-        CHECK(game_state.current_player().id == player1_id);
+        CHECK(game_state.current_player().player == Player::X);
 
         game_state.switch_players();
-        CHECK(game_state.current_player().id == player2_id);
+        CHECK(game_state.current_player().player == Player::O);
     }
 
     SECTION("check if a human player is playing against AI")

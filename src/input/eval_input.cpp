@@ -21,7 +21,7 @@ std::optional<Command> check_keyword_commands(CommandFactory& command_factory, c
     return {};
 }
 
-std::optional<Command> eval_input(const player_id player, Board& board, CommandFactory& command_factory, const std::string& input)
+std::optional<Command> eval_input(const Player player, Board& board, CommandFactory& command_factory, const std::string& input)
 {
     // check for simple keyword commands
     if (auto command = check_keyword_commands(command_factory, input))

@@ -11,7 +11,7 @@
 namespace tic_tac_toe {
 
 struct WithOwnerOfSquare {
-    WithOwnerOfSquare(Board& board, Square& square, const player_id player) : board_{board}, square_{square} { board_.change_owner_of_square(square_, player); }
+    WithOwnerOfSquare(Board& board, Square& square, const Player player) : board_{board}, square_{square} { board_.change_owner_of_square(square_, player); }
     ~WithOwnerOfSquare() { board_.clear_owner_of_square(square_); }
 
 private:
@@ -54,7 +54,7 @@ MinimaxMove minimax(Board& board, const Square square, const int depth, const in
         while (check_square.x < board.cols() && !done) {
             if (board.empty_square(check_square)) {
                 if (strategy == MinimaxStrategy::maximizing) {
-                    const WithOwnerOfSquare with_owner_of_square{board, check_square, player1_id};
+                    const WithOwnerOfSquare with_owner_of_square{board, check_square, Player::X};
                     const auto move = minimax(board, check_square, depth + 1, max_depth, MinimaxStrategy::minimizing, stats, alpha, beta);
 
                     if (move.score > best_move.score) {
@@ -65,7 +65,7 @@ MinimaxMove minimax(Board& board, const Square square, const int depth, const in
                             done = true;
                     }
                 } else {
-                    const WithOwnerOfSquare with_owner_of_square{board, check_square, player2_id};
+                    const WithOwnerOfSquare with_owner_of_square{board, check_square, Player::O};
                     const auto move = minimax(board, check_square, depth + 1, max_depth, MinimaxStrategy::maximizing, stats, alpha, beta);
 
                     if (move.score < best_move.score) {

@@ -5,7 +5,7 @@
 
 namespace tic_tac_toe {
 
-Command CommandFactory::create_player_move_command(const player_id player, const Square square)
+Command CommandFactory::create_player_move_command(const Player player, const Square square)
 {
     return PlayerMoveCommand(game_state_, board_, console_writer_, player, square);
 }

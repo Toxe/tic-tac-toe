@@ -9,7 +9,7 @@
 
 namespace tic_tac_toe {
 
-std::string read_input(const player_id player, ConsoleWriter& console_writer)
+std::string read_input(const Player player, ConsoleWriter& console_writer)
 {
     std::string input;
 
@@ -23,7 +23,7 @@ std::string read_input(const player_id player, ConsoleWriter& console_writer)
     return input;
 }
 
-Command receive_player_command(const player_id player, Board& board, ConsoleWriter& console_writer, CommandFactory& command_factory)
+Command receive_player_command(const Player player, Board& board, ConsoleWriter& console_writer, CommandFactory& command_factory)
 {
     while (true) {
         const auto input = read_input(player, console_writer);

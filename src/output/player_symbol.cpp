@@ -4,11 +4,11 @@
 
 namespace tic_tac_toe {
 
-char player_symbol(const player_id player)
+char player_symbol(const Player player)
 {
-    assert(player_id_is_valid(player));
+    assert(player_is_valid(player));
 
-    return player == player1_id ? 'X' : 'O';
+    return player == Player::X ? 'X' : 'O';
 }
 
 }  // namespace tic_tac_toe

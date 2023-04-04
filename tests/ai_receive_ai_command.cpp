@@ -28,15 +28,15 @@ TEST_CASE("ai/receive_ai_command")
         };
         CommandFactory command_factory{board, game_state, controller, console_writer};
 
-        auto command = receive_ai_command(player2_id, board, command_factory, console_writer);
+        auto command = receive_ai_command(Player::O, board, command_factory, console_writer);
         controller.execute(std::move(command));
 
-        CHECK(board.player_of_square({1, 1}) == player2_id);
+        CHECK(board.player_of_square({1, 1}) == Player::O);
     }
 
     SECTION("can receive commands for player 1 and 2")
     {
-        for (player_id player = player1_id; player <= player2_id; ++player) {
+        for (const auto player : {Player::X, Player::O}) {
             // board with one empty square
             auto board = Board{
                 "XOX",
@@ -62,7 +62,7 @@ TEST_CASE("ai/receive_ai_command")
         };
         CommandFactory command_factory{board, game_state, controller, console_writer};
 
-        CHECK_THROWS(receive_ai_command(player2_id, board, command_factory, console_writer));
+        CHECK_THROWS(receive_ai_command(Player::O, board, command_factory, console_writer));
     }
 }
 

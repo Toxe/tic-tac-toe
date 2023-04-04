@@ -17,7 +17,7 @@ public:
 
 private:
     std::array<PlayerInfo, 2> players_;
-    player_id current_player_id_ = player1_id;
+    Player current_player_ = Player::X;
 };
 
 }  // namespace tic_tac_toe

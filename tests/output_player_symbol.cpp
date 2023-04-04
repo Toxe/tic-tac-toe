@@ -8,12 +8,12 @@ TEST_CASE("output/player_symbol")
 {
     SECTION("player 1")
     {
-        CHECK(player_symbol(player1_id) == 'X');
+        CHECK(player_symbol(Player::X) == 'X');
     }
 
     SECTION("player 2")
     {
-        CHECK(player_symbol(player2_id) == 'O');
+        CHECK(player_symbol(Player::O) == 'O');
     }
 }
 

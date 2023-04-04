@@ -13,6 +13,6 @@ enum class WinCondition {
 
 [[nodiscard]] WinCondition get_win_condition(const Board& board);
 [[nodiscard]] bool game_over(WinCondition win_condition);
-[[nodiscard]] bool check_player_victory(const Board& board, player_id player);
+[[nodiscard]] bool check_player_victory(const Board& board, Player player);
 
 }  // namespace tic_tac_toe

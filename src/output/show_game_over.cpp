@@ -18,7 +18,7 @@ std::string generate_draw()
     return "Draw!";
 }
 
-std::string generate_player_victory(const player_id player)
+std::string generate_player_victory(const Player player)
 {
     return fmt::format("Player {} won!", player_symbol(player));
 }
@@ -28,8 +28,8 @@ std::string show_game_over(const WinCondition win_condition)
     switch (win_condition) {
         case WinCondition::none: return generate_ongoing_game();
         case WinCondition::draw: return generate_draw();
-        case WinCondition::player1_won: return generate_player_victory(player1_id);
-        case WinCondition::player2_won: return generate_player_victory(player2_id);
+        case WinCondition::player1_won: return generate_player_victory(Player::X);
+        case WinCondition::player2_won: return generate_player_victory(Player::O);
         default:
             throw std::runtime_error{"invalid win condition"};
     }

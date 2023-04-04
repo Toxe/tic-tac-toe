@@ -68,12 +68,12 @@ TEST_CASE("game/win_conditions")
             "XXX",
         };
 
-        CHECK(check_player_victory(board1, player1_id));
-        CHECK(check_player_victory(board2, player1_id));
-        CHECK(check_player_victory(board3, player1_id));
-        CHECK(check_player_victory(board1, player2_id) == false);
-        CHECK(check_player_victory(board2, player2_id) == false);
-        CHECK(check_player_victory(board3, player2_id) == false);
+        CHECK(check_player_victory(board1, Player::X));
+        CHECK(check_player_victory(board2, Player::X));
+        CHECK(check_player_victory(board3, Player::X));
+        CHECK(check_player_victory(board1, Player::O) == false);
+        CHECK(check_player_victory(board2, Player::O) == false);
+        CHECK(check_player_victory(board3, Player::O) == false);
     }
 
     SECTION("check columns")
@@ -96,12 +96,12 @@ TEST_CASE("game/win_conditions")
             "OXX",
         };
 
-        CHECK(check_player_victory(board1, player1_id));
-        CHECK(check_player_victory(board2, player1_id));
-        CHECK(check_player_victory(board3, player1_id));
-        CHECK(check_player_victory(board1, player2_id) == false);
-        CHECK(check_player_victory(board2, player2_id) == false);
-        CHECK(check_player_victory(board3, player2_id) == false);
+        CHECK(check_player_victory(board1, Player::X));
+        CHECK(check_player_victory(board2, Player::X));
+        CHECK(check_player_victory(board3, Player::X));
+        CHECK(check_player_victory(board1, Player::O) == false);
+        CHECK(check_player_victory(board2, Player::O) == false);
+        CHECK(check_player_victory(board3, Player::O) == false);
     }
 
     SECTION("check diagonals")
@@ -118,10 +118,10 @@ TEST_CASE("game/win_conditions")
             "XOO",
         };
 
-        CHECK(check_player_victory(board1, player1_id));
-        CHECK(check_player_victory(board2, player1_id));
-        CHECK(check_player_victory(board1, player2_id) == false);
-        CHECK(check_player_victory(board2, player2_id) == false);
+        CHECK(check_player_victory(board1, Player::X));
+        CHECK(check_player_victory(board2, Player::X));
+        CHECK(check_player_victory(board1, Player::O) == false);
+        CHECK(check_player_victory(board2, Player::O) == false);
     }
 }
 
