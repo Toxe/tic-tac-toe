@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+    <Type Name="tic_tac_toe::Board">
+        <DisplayString>| {squares_.data_[0]}{squares_.data_[1]}{squares_.data_[2]} | {squares_.data_[3]}{squares_.data_[4]}{squares_.data_[5]} | {squares_.data_[6]}{squares_.data_[7]}{squares_.data_[8]} |</DisplayString>
+        <Expand>
+            <Synthetic Name="[row 0]">
+                <DisplayString>| {squares_.data_[0]} | {squares_.data_[1]} | {squares_.data_[2]} |</DisplayString>
+            </Synthetic>
+            <Synthetic Name="[row 1]">
+                <DisplayString>| {squares_.data_[4]} | {squares_.data_[4]} | {squares_.data_[5]} |</DisplayString>
+            </Synthetic>
+            <Synthetic Name="[row 2]">
+                <DisplayString>| {squares_.data_[6]} | {squares_.data_[7]} | {squares_.data_[8]} |</DisplayString>
+            </Synthetic>
+        </Expand>
+    </Type>
+</AutoVisualizer>
