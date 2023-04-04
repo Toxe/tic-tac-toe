@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+    <Type Name="tic_tac_toe::Coords&lt;*&gt;">
+        <DisplayString>({x}/{y})</DisplayString>
+        <Expand>
+            <Item Name="x">x</Item>
+            <Item Name="y">y</Item>
+        </Expand>
+    </Type>
+
+    <Type Name="tic_tac_toe::Grid&lt;*,*&gt;">
+        <DisplayString>({cols_}x{rows_}) size={data_.size()}</DisplayString>
+        <Expand>
+            <Item Name="cols">cols_</Item>
+            <Item Name="rows">rows_</Item>
+            <ArrayItems Condition="data_.size() > 0">
+                <Rank>2</Rank>
+                <Size>$i == 0 ? rows_ : cols_</Size>
+                <ValuePointer>data_._Mypair._Myval2._Myfirst</ValuePointer>
+            </ArrayItems>
+        </Expand>
+    </Type>
+</AutoVisualizer>
