@@ -4,7 +4,7 @@
 
 namespace tic_tac_toe {
 
-TEST_CASE("game/board")
+TEST_CASE("board/board")
 {
     SECTION("a new Board is empty")
     {
